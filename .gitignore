@@ -4,6 +4,10 @@ ffmpeg
 fnalibs/
 xnatofna/
 
+# Symlinks created by run-mac.sh at runtime
+game/*.dll
+game/FNA.dll.config
+
 # OS / editor
 .DS_Store
 *.swp

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+  <file name="DashboardIcon.ico" source="original">
+    <mtime>1624151667</mtime>
+    <size>16958</size>
+    <md5>3f1d51efab9d70fcebd4636507fded08</md5>
+    <crc32>ff3776a8</crc32>
+    <sha1>7dccf37726de81711efffa034ba773e56e9ca0a7</sha1>
+    <format>Unknown</format>
+  </file>
+  <file name="DashboardIcon.png" source="original">
+    <mtime>1624151687</mtime>
+    <size>11458</size>
+    <md5>c7ffe0b674f2cf47b63feffae814d89c</md5>
+    <crc32>f26becc5</crc32>
+    <sha1>61c3ff4c9a177e3849369ce5c5b263b01758754f</sha1>
+    <format>PNG</format>
+  </file>
+  <file name="DashboardIcon_thumb.jpg" source="derivative">
+    <format>JPEG Thumb</format>
+    <original>DashboardIcon.png</original>
+    <mtime>1624152197</mtime>
+    <size>4683</size>
+    <md5>1a52e5eaaa4a3050fbc8041d623ed355</md5>
+    <crc32>d200bb93</crc32>
+    <sha1>0a72a6adc1f0919f7abf93e88abcea1a24d0c14b</sha1>
+  </file>
+  <file name="GameInfo.bin" source="original">
+    <mtime>1624151691</mtime>
+    <size>1449</size>
+    <md5>76703633ae267ff626e6eb01388fbdc1</md5>
+    <crc32>414d5055</crc32>
+    <sha1>91ad2c332f8c891c201fb98371a5123698670743</sha1>
+    <format>Unknown</format>
+  </file>
+  <file name="GameInfo.xml" source="original">
+    <mtime>1624151696</mtime>
+    <size>1878</size>
+    <md5>24f20d9a4e8084297d270e6a6ce5cd2c</md5>
+    <crc32>b4e6132c</crc32>
+    <sha1>fbb62223a5600b1072fba5286ec5911c24702b7a</sha1>
+    <format>Metadata</format>
+  </file>
+  <file name="Manor.txt" source="original">
+    <mtime>1624151700</mtime>
+    <size>68122</size>
+    <md5>9e29aa4f727191c1c71e9cb66ac32b77</md5>
+    <crc32>2ad6a454</crc32>
+    <sha1>3e6085f874cb3f9c8148d32d16c7b1e97392f326</sha1>
+    <format>Text</format>
+  </file>
+  <file name="ManorSpawns.txt" source="original">
+    <mtime>1624151705</mtime>
+    <size>3828</size>
+    <md5>5565610ca2bcdc16965fc988c111134c</md5>
+    <crc32>3d33d359</crc32>
+    <sha1>62a81378aec61fbf0d71070458177db307587a38</sha1>
+    <format>Text</format>
+  </file>
+  <file name="PathMap_Manor.txt" source="original">
+    <mtime>1624151717</mtime>
+    <size>3368928</size>
+    <md5>de08269ecc88cd7fd58802e028321261</md5>
+    <crc32>bef311e2</crc32>
+    <sha1>241dffe067c3337c64a3b981dbd3bb206d9de7d0</sha1>
+    <format>Text</format>
+  </file>
+  <file name="PathMap_New.txt" source="original">
+    <mtime>1624151723</mtime>
+    <size>3368928</size>
+    <md5>df455628041b10042369193c18250855</md5>
+    <crc32>3992a99d</crc32>
+    <sha1>6b1422c382af1313abee873968dfbd2ce6d906cc</sha1>
+    <format>Text</format>
+  </file>
+  <file name="TestMap.txt" source="original">
+    <mtime>1624151729</mtime>
+    <size>43008</size>
+    <md5>e63cdc7e7f83b293d510c813e3ca79fc</md5>
+    <crc32>0d5f805a</crc32>
+    <sha1>b2a406905273209bdbccd37f9a5e216b983e5a46</sha1>
+    <format>Text</format>
+  </file>
+  <file name="TestMapSpawns_NEW.txt" source="original">
+    <mtime>1624151733</mtime>
+    <size>3903</size>
+    <md5>88805d19495d060ed96eef0ded1e7d79</md5>
+    <crc32>0d56bd70</crc32>
+    <sha1>163a714c4861b9081d51ce6400cef0a95117a4e1</sha1>
+    <format>Text</format>
+  </file>
+  <file name="TestMap_NEW.txt" source="original">
+    <mtime>1624151731</mtime>
+    <size>68113</size>
+    <md5>f7acf6b63978896abe00685f58192748</md5>
+    <crc32>1233d66b</crc32>
+    <sha1>8cad17df38cd2854b64dac597f2efada493bcbdc</sha1>
+    <format>Text</format>
+  </file>
+  <file name="ZombieEstate.exe" source="original">
+    <mtime>1624151735</mtime>
+    <size>200704</size>
+    <md5>81848d37ce519aae1c459478b25d2f8c</md5>
+    <crc32>91dc8a85</crc32>
+    <sha1>eaadd52ecc7ffe6a054397f1be0575d1aa2d7170</sha1>
+    <format>Windows Executable</format>
+  </file>
+  <file name="__ia_thumb.jpg" source="original">
+    <mtime>1624152249</mtime>
+    <size>12678</size>
+    <md5>b0f21b32a94f85874eb9a8311f537705</md5>
+    <crc32>8fae6bb7</crc32>
+    <sha1>62c1fb934cf1fc5e5c09c2521ce06c76b875e033</sha1>
+    <format>Item Tile</format>
+    <rotation>0</rotation>
+  </file>
+  <file name="zombie-estate_archive.torrent" source="metadata">
+    <btih>9a9ec9b66ba3101b2ec5f365998792c67abeb6db</btih>
+    <mtime>1653084624</mtime>
+    <size>4088</size>
+    <md5>7e6a826dd1ccf2de675e1fcc5f2e6216</md5>
+    <crc32>f68766cd</crc32>
+    <sha1>ba360d3de862e1c51efa754d459ee819fe3b339c</sha1>
+    <format>Archive BitTorrent</format>
+  </file>
+  <file name="zombie-estate_files.xml" source="original">
+    <format>Metadata</format>
+    <md5>37ee1b13fac6de50541ca74e2bdfcee1</md5>
+    <summation>md5</summation>
+  </file>
+  <file name="zombie-estate_meta.sqlite" source="original">
+    <mtime>1624151797</mtime>
+    <size>45056</size>
+    <md5>8156bc150715b43152a9c72686bffd7d</md5>
+    <crc32>730757e1</crc32>
+    <sha1>373e1f88c7d932c4b949cd056aeb34eac606c06f</sha1>
+    <format>Metadata</format>
+  </file>
+  <file name="zombie-estate_meta.xml" source="original">
+    <mtime>1624152152</mtime>
+    <size>763</size>
+    <md5>48b69a805835e9904e3f5d71ce54062b</md5>
+    <crc32>1db6b6e4</crc32>
+    <sha1>7caf5bdbe076a11ca9224306c9acf7d2490abd49</sha1>
+    <format>Metadata</format>
+  </file>
+  <file name="zombie-estate_reviews.xml" source="original">
+    <mtime>1653084623</mtime>
+    <size>794</size>
+    <md5>92dc0242e06f6812c278df880e26584d</md5>
+    <crc32>e12d0610</crc32>
+    <sha1>b862efde319ae93bdc8477617e3b077de43422fc</sha1>
+    <format>Metadata</format>
+  </file>
+</files>

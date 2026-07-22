@@ -1,0 +1,28 @@
+# Large / downloaded binaries (install locally)
+ffmpeg
+*.dylib
+fnalibs/
+xnatofna/
+
+# OS / editor
+.DS_Store
+*.swp
+*~
+
+# Build artifacts
+*.pdb
+bin/
+obj/
+
+# Archives and metadata not needed for the port
+*.torrent
+*.sqlite
+*.msi
+
+# Temporary Mono install paths
+mono-payload/
+
+# Python scratch
+__pycache__/
+*.pyc
+inspect_refs.py

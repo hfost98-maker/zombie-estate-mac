@@ -43,7 +43,31 @@ First launch runs `scripts/convert-xbox.sh` if the exe still matches the Xbox ba
 
 - **XnaToFna timemachine conversion succeeds** for `ZombieEstate.exe`
 - **Game reaches LoadContent** — SDL3/Metal init works on Apple Silicon
-- **Blocker:** compiled content (`.xnb` files under `game/Content/`) is not present in the Internet Archive dump; the game fails loading `MasterGrid.xnb`. Map/spawn `.txt` files are included but textures/audio content may need to be sourced separately.
+- **Blocker:** compiled content (`.xnb` files under `game/Content/`) is not present in the Internet Archive dump; the game fails loading `MasterGrid.xnb`. Map/spawn `.txt` files are included but textures/audio content must be sourced separately.
+
+### Missing content assets
+
+Searched `~/Desktop`, `~/Projects`, `~/Downloads`, `zombie-estate.zip`, Whisky bottles, and VMware VMs — **zero `.xnb` files** on this machine. The [Internet Archive item](https://archive.org/details/zombie-estate) (`zombie-estate_files.xml`) lists only 19 files (exe, maps, icons, metadata); no `Content/` folder was ever uploaded.
+
+The game expects at least these compiled assets (from `ZombieEstate.exe` strings):
+
+| Path | Type |
+|------|------|
+| `Content/MasterGrid.xnb` | Tile/grid texture (first load failure) |
+| `Content/MasterWall.xnb`, `MasterFloor.xnb`, `MasterWallTexture.xnb` | Level textures |
+| `Content/Font.xnb`, `BigFont.xnb`, `HugeFont.xnb` | Fonts |
+| `Content/Texture*.xnb`, `TextureNumber.xnb` | UI/game textures |
+| `Content/Sounds/*.xnb` | ~25 sound effects |
+| `Content/MusicParts/*.xnb` | Music stems |
+
+**Where to get them:**
+
+1. **Xbox 360 you own** — copy from a licensed install under the title's package `Content/` folder (Title ID `1481966848`).
+2. **Your encrypted VMware VM** — if you recover the password, the Windows bottle may have a full XBLIG install with `Content/`.
+3. **Internet Archive is incomplete** — the uploader only preserved loose files, not the full 40 MB XBLIG package content.
+4. **Zombie Estate 2 (Steam)** — different game/engine; assets are not interchangeable.
+
+Once you have a `Content/` folder, copy it to `game/Content/` and run `./run-mac.sh` again.
 
 ## Rebuilding tools
 

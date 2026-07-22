@@ -5,7 +5,20 @@ using Mono.Cecil;
 
 class PatchXna {
     static void Main(string[] args) {
-        string path = Path.GetFullPath(args[0]);
+        bool mscorlibOnly = false;
+        string path = null;
+        foreach (string arg in args) {
+            if (arg == "--mscorlib-only")
+                mscorlibOnly = true;
+            else if (!arg.StartsWith("-"))
+                path = arg;
+        }
+        if (path == null) {
+            Console.Error.WriteLine("Usage: patch-xna.exe [--mscorlib-only] <game.exe>");
+            Environment.Exit(1);
+        }
+        path = Path.GetFullPath(path);
+
         var reader = new ReaderParameters {
             ReadingMode = ReadingMode.Deferred,
             ReadWrite = true,
@@ -16,7 +29,7 @@ class PatchXna {
         var module = asm.MainModule;
 
         foreach (var reference in module.AssemblyReferences.ToList()) {
-            if (reference.Name.StartsWith("Microsoft.Xna.Framework")) {
+            if (!mscorlibOnly && reference.Name.StartsWith("Microsoft.Xna.Framework")) {
                 reference.Name = "FNA";
                 reference.PublicKeyToken = null;
                 reference.Version = new Version(0, 0, 0, 0);
@@ -24,6 +37,12 @@ class PatchXna {
                 reference.Version = new Version(4, 0, 0, 0);
                 reference.PublicKeyToken = null;
             }
+        }
+
+        if (mscorlibOnly) {
+            asm.Write(path);
+            Console.WriteLine("Patched mscorlib refs in " + path);
+            return;
         }
 
         var fnaRef = module.AssemblyReferences.First(r => r.Name == "FNA");

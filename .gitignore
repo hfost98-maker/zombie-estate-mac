@@ -6,7 +6,9 @@ xnatofna/
 
 # Symlinks created by run-mac.sh at runtime
 game/*.dll
+game/*.dylib
 game/FNA.dll.config
+game/XnaToFna.exe
 
 # OS / editor
 .DS_Store

@@ -10,6 +10,15 @@ game/*.dylib
 game/FNA.dll.config
 game/XnaToFna.exe
 
+# Compiled XNA content (large; source from XBLIG package, do not commit)
+game/Content/
+
+# Runtime / patch artifacts
+game/.input-focus-patched
+game/xnatofna-crash.log
+*.pre-focus-patch
+Microsoft.Xna.Framework.RuntimeProfile
+
 # OS / editor
 .DS_Store
 *.swp

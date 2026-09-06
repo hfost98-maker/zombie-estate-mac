@@ -1,0 +1,777 @@
+﻿{
+    "manifestVersion":  2,
+    "title":  "Zombie Estate",
+    "titleId":  "584E07D2",
+    "generatedUtc":  "2026-07-24T00:28:52.7167409Z",
+    "source":  {
+                   "path":  "E:\\XBLIG-Raw\\Zombie Estate.stfs",
+                   "bytes":  41832448,
+                   "sha256":  "F61EF0A08258B6B8DB445977BC9021429B88A38273BDAE5B5DEE9603AB4F7AFB"
+               },
+    "release":  {
+                    "directory":  "E:\\Zombie Estate Complete Recovery\\05-release\\Zombie Estate Windows FINAL",
+                    "payloadFileCount":  138,
+                    "payloadBytes":  233732196,
+                    "payloadTreeSha256":  "B2AB3DFC6E5A85323FA3B95823DB2659E5EAB6378B206A436C6F4F52E5B30BF3",
+                    "payloadTreeAlgorithm":  "SHA256(UTF8(path\u003cTAB\u003ebytes\u003cTAB\u003esha256\u003cLF\u003e), MANIFEST.json excluded)",
+                    "staleCrashLogIncluded":  false
+                },
+    "critical":  {
+                     "executableSha256":  "0E92884B80CFB3CCB9D5D6849E39FB142D995811DD5BC146D3948EF900C50C50",
+                     "fnaSha256":  "3DC5047DB16D7FD1A1652501F9CC8583E02D48E1BB7CEF5F4E3CCA6E41DC3325",
+                     "netStubSha256":  "1E99E98475D90B4C800B4DAB383B1FE9A8892E2E1D4D55A4D959F46FC3E21DE3",
+                     "controllerDatabaseSha256":  "F857275FE139DDF724EDE6500B7DC05AF20CDDB88EB1136A5A1218B33151C07C"
+                 },
+    "visualFidelity":  {
+                           "result":  "pass",
+                           "originalAssetsOnly":  true,
+                           "report":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\ZOMBIE-ESTATE-VISUAL-FIDELITY-FINAL.md",
+                           "contactSheet":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\ZOMBIE-ESTATE-VISUAL-FINAL-CONTACT-SHEET.png",
+                           "metrics":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\final-release-visual-metrics.json",
+                           "menuCharacterPlayerZombieRoute":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\visual-runtime-state-audit-v2",
+                           "inventoryAndSelectionRoute":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\visual-final-ui-overlay",
+                           "finalExactBackbuffer":  "1280x720",
+                           "waveOneZombieCountVerified":  80
+                       },
+    "reproducibility":  {
+                            "result":  "pass",
+                            "coreFilesMatched":  135,
+                            "report":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\reproducible-visual-build-report.json",
+                            "script":  "E:\\Zombie Estate Complete Recovery\\02-workspace\\Run-ZombieEstatePipeline.ps1",
+                            "outputDirectory":  "E:\\Zombie Estate Complete Recovery\\03-stage\\reproducible-visual-final"
+                        },
+    "releaseVerification":  {
+                                "fullscreen":  {
+                                                   "result":  "pass",
+                                                   "durationSeconds":  70,
+                                                   "alive":  true,
+                                                   "responding":  true,
+                                                   "coversLogicalVirtualScreen":  true,
+                                                   "clientEqualsWindow":  true,
+                                                   "rendererMarkerPresent":  true,
+                                                   "worldMarkerPresent":  true,
+                                                   "stderrBytes":  0,
+                                                   "evidence":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\release-fullscreen-cold-inspection.json"
+                                               },
+                                "windowed":  {
+                                                 "result":  "pass",
+                                                 "durationSeconds":  45,
+                                                 "alive":  true,
+                                                 "responding":  true,
+                                                 "rendererMarkerPresent":  true,
+                                                 "worldMarkerPresent":  true,
+                                                 "stderrBytes":  0,
+                                                 "evidence":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\release-windowed-cold-inspection.json"
+                                             },
+                                "exactNativeVisualRoute":  {
+                                                               "result":  "pass",
+                                                               "durationSeconds":  80,
+                                                               "alive":  true,
+                                                               "responding":  true,
+                                                               "rendererMarkerPresent":  true,
+                                                               "worldMarkerPresent":  true,
+                                                               "evidence":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\visual-runtime-state-audit-v2\\inspection.json"
+                                                           },
+                                "inventoryUiRoute":  {
+                                                         "result":  "pass",
+                                                         "durationSeconds":  42,
+                                                         "alive":  true,
+                                                         "responding":  true,
+                                                         "stderrBytes":  0,
+                                                         "evidence":  "E:\\Zombie Estate Complete Recovery\\04-evidence\\visual-final-ui-overlay\\inspection.json"
+                                                     }
+                            },
+    "knownNonBlockingWarning":  "MOJOSHADER_compileEffect Error: Not an Effects Framework binary - expected for the bypassed Xbox-only instancing effect; the verified desktop CPU renderer replaces that path.",
+    "files":  [
+                  {
+                      "path":  "Content\\Advertisement.xnb",
+                      "bytes":  3686485,
+                      "sha256":  "C73EFC674754223481B44891BCC6BCD7EB8C5A94531A8DF6AB39119F9A3224D9"
+                  },
+                  {
+                      "path":  "Content\\AmmoBar.xnb",
+                      "bytes":  4181,
+                      "sha256":  "B5118AA42B3A9B6C397DFD886A24E70F4D094D79FE5BC3415E435CF7118AE4F6"
+                  },
+                  {
+                      "path":  "Content\\Bar.xnb",
+                      "bytes":  16469,
+                      "sha256":  "79E6C44469264E41C5CDCB8F43FFB8BF58DC79DE5AFC745BCAB33E7FDC4362C8"
+                  },
+                  {
+                      "path":  "Content\\BarBG.xnb",
+                      "bytes":  16469,
+                      "sha256":  "50D4CEEBECA2F1DB521E87B4762C2CBCE3940A16C93A17D43B0F7943463F57B6"
+                  },
+                  {
+                      "path":  "Content\\bbEffect.xnb",
+                      "bytes":  2706,
+                      "sha256":  "0EE5FCEB758CFBC471702180A263A4CB65E3830946754B95C14A97F8FCA5824C"
+                  },
+                  {
+                      "path":  "Content\\BigFont.xnb",
+                      "bytes":  53218,
+                      "sha256":  "2EA4D29F2F82FDE3810FB21540B57D09A8054E9AD308E47E7E6D5CCF4E86EE57"
+                  },
+                  {
+                      "path":  "Content\\Billboard.xnb",
+                      "bytes":  4374,
+                      "sha256":  "8E8ADF30CC08794E1601C85FFAD6309E864733E66011E6967F1299DC7B063A3C"
+                  },
+                  {
+                      "path":  "Content\\BloomCombine.xnb",
+                      "bytes":  1286,
+                      "sha256":  "4DBED83C227E594128C386CBDF9D08B23AD3D796112F3294DF5DD7172E19AFB1"
+                  },
+                  {
+                      "path":  "Content\\BloomExtract.xnb",
+                      "bytes":  782,
+                      "sha256":  "FBB8FC78ECE3F2D95BD171398C2F7EA84664C1EFA26D18F6FB0B3E960A5010AB"
+                  },
+                  {
+                      "path":  "Content\\BrickTest.xnb",
+                      "bytes":  4181,
+                      "sha256":  "9E2ACAAE621D9685CED8CBA48FD72829AC4226407842AB6603E7B504F2DF8B27"
+                  },
+                  {
+                      "path":  "Content\\cat.xnb",
+                      "bytes":  262229,
+                      "sha256":  "F7AF0D4CA8EF0111D1BFD26437B8B1E9B52C177478F03793DF3AE690B32E6AFA"
+                  },
+                  {
+                      "path":  "Content\\cat_0.xnb",
+                      "bytes":  43821,
+                      "sha256":  "59D5ACBD288F6EB0E52E8C6A577243DF85F9B35BE231CA94762CEA42047BB4A9"
+                  },
+                  {
+                      "path":  "Content\\Cats.xnb",
+                      "bytes":  1410,
+                      "sha256":  "0F093F51C6D8D041B763AE05FFD61DC8A22AE094D286F4272F5E249545B011F8"
+                  },
+                  {
+                      "path":  "Content\\CementTest.xnb",
+                      "bytes":  4181,
+                      "sha256":  "8CBED655E8CFCF3845CDD6E5E2C416F48B41140FD1CC39D48DF78B46B6444C32"
+                  },
+                  {
+                      "path":  "Content\\CementTest_0.xnb",
+                      "bytes":  801,
+                      "sha256":  "224CE62ED61E6161B8114B252F67C46A7063D8EF12FFB3AAC4EBCD39FA9135AE"
+                  },
+                  {
+                      "path":  "Content\\CementTest2.xnb",
+                      "bytes":  4181,
+                      "sha256":  "C071414C93A8CA4C751652D28F5702DC79EB0E0132D885F4BBE126D70ED9D063"
+                  },
+                  {
+                      "path":  "Content\\CementWall.xnb",
+                      "bytes":  1465,
+                      "sha256":  "F364D8232DD2059719EEBC177033B970DA3298083D1D92FF951CFFD121F06558"
+                  },
+                  {
+                      "path":  "Content\\CharacterSelectScreen.xnb",
+                      "bytes":  3686485,
+                      "sha256":  "83436C84D8126F6584DCC67FD8057F60BEA89C3B59CA082D31B8EC03797EEAAE"
+                  },
+                  {
+                      "path":  "Content\\Circle.xnb",
+                      "bytes":  4181,
+                      "sha256":  "640C48C23B386D35DAD7F89FF08D665D64E3502CB3425F2636D01CD8704A4AEB"
+                  },
+                  {
+                      "path":  "Content\\Copy of InstancedModel.xnb",
+                      "bytes":  11738,
+                      "sha256":  "C0E606EE05B5116B17DE53283F6A79E327014AE40C133C8D7ED2C088D5CA68F2"
+                  },
+                  {
+                      "path":  "Content\\Credits.xnb",
+                      "bytes":  3686485,
+                      "sha256":  "B5A323A7DBEDDAF8DE2C4C5D8880ADDC16AE40A4C9E8535EF1562C951CC4E68B"
+                  },
+                  {
+                      "path":  "Content\\DownArrow.xnb",
+                      "bytes":  4181,
+                      "sha256":  "890DBA80F93F298B545E60A0FB121E31EA15E4A21E674C036749ACB07B947984"
+                  },
+                  {
+                      "path":  "Content\\DownStore.xnb",
+                      "bytes":  4181,
+                      "sha256":  "41E6FE7C3B9D799B0DB5EF4528C4B279B84BFD5AF16118AACF70A1366E4BD07C"
+                  },
+                  {
+                      "path":  "Content\\DPadHud.xnb",
+                      "bytes":  65621,
+                      "sha256":  "EE9F0985F37F7AAD62004DCB3C1C7C352FDE556DC1B56C02F513BDAD66996AAE"
+                  },
+                  {
+                      "path":  "Content\\Font.xnb",
+                      "bytes":  24546,
+                      "sha256":  "B9B877969887947197A5529FA06F153C1502CB54A8975012125B09FC556286B3"
+                  },
+                  {
+                      "path":  "Content\\GaussianBlur.xnb",
+                      "bytes":  1686,
+                      "sha256":  "891D6B5AD34655EC813CDD98442544CCE21DBD2440133FF4603E83296015F5B0"
+                  },
+                  {
+                      "path":  "Content\\Highlight.xnb",
+                      "bytes":  4181,
+                      "sha256":  "CE6489D008C6DD86183DF9FE3A6685E97994D6EBB46A49508538234EC2EBE5EA"
+                  },
+                  {
+                      "path":  "Content\\HUD.xnb",
+                      "bytes":  65621,
+                      "sha256":  "95A97374638C0CFF4C621488BE184279396A7E05950E7C3D0095F171AD6AD843"
+                  },
+                  {
+                      "path":  "Content\\HugeFont.xnb",
+                      "bytes":  398306,
+                      "sha256":  "797E6F014B4902AE4EAC5F79059CD45AB8A60C0CF2030BBF28A5781ED134C64C"
+                  },
+                  {
+                      "path":  "Content\\InstancedModel.xnb",
+                      "bytes":  11106,
+                      "sha256":  "D984042A3F4599FB87048AE92C775C9951169788174B89A362B47D4401E85D68"
+                  },
+                  {
+                      "path":  "Content\\Instructions.xnb",
+                      "bytes":  3686485,
+                      "sha256":  "39BA749A8E97E51FB420ABB7A7130EFF1BAE2C9CEC0DC204B38115CEB7B4374A"
+                  },
+                  {
+                      "path":  "Content\\Instructions_Next.xnb",
+                      "bytes":  3686485,
+                      "sha256":  "A7FD07B2BEFAE0A9759881B396109DFB1A0F8B1671F6C3428808EBD48F91C244"
+                  },
+                  {
+                      "path":  "Content\\LeftArrow.xnb",
+                      "bytes":  4181,
+                      "sha256":  "4C76082E54EEE45C4B1CAEA7EC4DC26606CF5C9944EDE3BE96CF34F6018E8937"
+                  },
+                  {
+                      "path":  "Content\\MasterFloor.xnb",
+                      "bytes":  1374,
+                      "sha256":  "1EB279626B13A700BCD4B932C153D517F582316148555262E44ACC951D693FD0"
+                  },
+                  {
+                      "path":  "Content\\MasterGrid.xnb",
+                      "bytes":  1048661,
+                      "sha256":  "E53F33355B9FD8831947BA9D1ED17E97891DDD94F2F9DFB4A9F3DCE397FE69C0"
+                  },
+                  {
+                      "path":  "Content\\MasterWall.xnb",
+                      "bytes":  1374,
+                      "sha256":  "FE25B8EB8C839465C231DF6841E3DE3E3F1025558113995772D21DD165AD6D93"
+                  },
+                  {
+                      "path":  "Content\\MasterWallTexture.xnb",
+                      "bytes":  1048661,
+                      "sha256":  "121A4B0E3E162925FD01AF8DBCA59BAC058A460BF4483894B468BB1F4D82604E"
+                  },
+                  {
+                      "path":  "Content\\MenuSelectionBG.xnb",
+                      "bytes":  49237,
+                      "sha256":  "D0FC21A52F5FC959345D39153E0484ABC901ACF2355B06CB35719B7779CA5C18"
+                  },
+                  {
+                      "path":  "Content\\MusicParts\\3part_cello.xnb",
+                      "bytes":  13087591,
+                      "sha256":  "05CF9FE48F4F26B2F22C5AE148EEB07DAE85A6E4ABB96D71171DB7FDCE9893FB"
+                  },
+                  {
+                      "path":  "Content\\MusicParts\\3part_violaviolin.xnb",
+                      "bytes":  13087591,
+                      "sha256":  "A607F962EF93CBD3DDF6787AC7EAECAAA5688843AC3812635ED9C908D31F727C"
+                  },
+                  {
+                      "path":  "Content\\MusicParts\\3part_violins.xnb",
+                      "bytes":  13087591,
+                      "sha256":  "DA03367FC21794D80ACB6E6498C48A151120C38B03798253184723B9ECAC1AF1"
+                  },
+                  {
+                      "path":  "Content\\MusicParts\\ZombieMusic_Cello.xnb",
+                      "bytes":  46416999,
+                      "sha256":  "42D005FF77AD3FF3764EF03246AF5EE959A45C6B62CBC786D983EE8A464BF646"
+                  },
+                  {
+                      "path":  "Content\\MusicParts\\ZombieMusic_Viola.xnb",
+                      "bytes":  46419815,
+                      "sha256":  "5E2C9B47C5B14C8482614B2D9C3157D05617E29D8A5D6C2438E3475C5B18B331"
+                  },
+                  {
+                      "path":  "Content\\MusicParts\\ZombieMusic_Vln1.xnb",
+                      "bytes":  46419815,
+                      "sha256":  "DF0A8AA7375820A646B9FED582C250C4A4554A868125C1FBBB0976ACDAE5CC3E"
+                  },
+                  {
+                      "path":  "Content\\PathMap_New.txt",
+                      "bytes":  3368928,
+                      "sha256":  "C5D8C7C58A37AA9A70FD72F135E37BF1B82D43F3B8A7051F88838D5012294146"
+                  },
+                  {
+                      "path":  "Content\\Pixel.xnb",
+                      "bytes":  89,
+                      "sha256":  "AFB0A005180328506E658F8871153D2D646C0883B9F22E1E3F7BE168A85E16B7"
+                  },
+                  {
+                      "path":  "Content\\Plane.xnb",
+                      "bytes":  1360,
+                      "sha256":  "6E9C2F75B8D3CE4F536405DE124400253C68DF4DEDB16B03EF1FE97A2B80AFCA"
+                  },
+                  {
+                      "path":  "Content\\Player\\Player_Back.xnb",
+                      "bytes":  1109,
+                      "sha256":  "438C39915A257C275806C1F59C66AEE61522D877C2876F160491A46700E172DB"
+                  },
+                  {
+                      "path":  "Content\\Player\\Player_Front.xnb",
+                      "bytes":  1109,
+                      "sha256":  "1BF8F6831101E3A4D8A793B3CA4B6F45F6B5E86050B83641FDA457B1202D72F1"
+                  },
+                  {
+                      "path":  "Content\\Player\\Player_Left.xnb",
+                      "bytes":  1109,
+                      "sha256":  "93CDF4D5872156B8D8E39F476026D7F2AF4481A13009BE73D81E1665229A3DA0"
+                  },
+                  {
+                      "path":  "Content\\Player\\Player_Right.xnb",
+                      "bytes":  1109,
+                      "sha256":  "B62A6A6CF187D6C99C597B3B2C2F752864E812454AD901FAA66D1DCA854D1B1B"
+                  },
+                  {
+                      "path":  "Content\\Player\\ZombieOne_Down.xnb",
+                      "bytes":  1109,
+                      "sha256":  "1334DAF3F5D4CC89BBEA5DD012BF661CA0702AD6BC91FBD70156B7CC242F2248"
+                  },
+                  {
+                      "path":  "Content\\Player\\ZombieOne_Left.xnb",
+                      "bytes":  1109,
+                      "sha256":  "0C8EB09D2C7570679428801049EBAF059EAEA89B44B7DB384FF4C7DA92B9C895"
+                  },
+                  {
+                      "path":  "Content\\Player\\ZombieOne_Right.xnb",
+                      "bytes":  1109,
+                      "sha256":  "F4E71C68E854CBCECC1C054912AA148069424189E9485168140B1AEA94D8F522"
+                  },
+                  {
+                      "path":  "Content\\Player\\ZombieOne_Up.xnb",
+                      "bytes":  1109,
+                      "sha256":  "8DB1AEC07FB9995040B32FEB01D2741DBEB93DF372F9C3579D35ECA74CB852AE"
+                  },
+                  {
+                      "path":  "Content\\RightArrow.xnb",
+                      "bytes":  4181,
+                      "sha256":  "703A44788E80E9EDC26C2D99B057B5658D414EB8E55C0BDE9852616B2ABC36D6"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\ammo.xnb",
+                      "bytes":  11367,
+                      "sha256":  "AD717A2571CDC229BB0607ACE773160E52BDF3DDA81AAF5EC3485CBF18B1769B"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Bubble.xnb",
+                      "bytes":  35943,
+                      "sha256":  "5392A6FD837AA755C755C7ADEF481F70C8FA6B10C581FA2545267FE8578D90AF"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\cardshuffle.xnb",
+                      "bytes":  35943,
+                      "sha256":  "F3E8E302048A47C90A0D19C35788571925DDCB34B43839D03850936BC35D56B2"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Click.xnb",
+                      "bytes":  3175,
+                      "sha256":  "231DFF4557D384DE5290E2823D219BDE323190B4C7596AB08ABF4A5DC551EC45"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Death.xnb",
+                      "bytes":  79975,
+                      "sha256":  "6D4328DE95269E9A92BB5B6F1CD0BD23F428BD40223AD155A9F2FED3DB8241B6"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\explo1.xnb",
+                      "bytes":  53351,
+                      "sha256":  "517F7FDD5DF6F81D43AFDA7570872F14D5D90E97112D3D98975D7E588FC98E99"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\explo2.xnb",
+                      "bytes":  53351,
+                      "sha256":  "9B557E0CA9A2D6718657CBDD95873F391080C68CC7ECD69F2691386CC149F685"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\explo3.xnb",
+                      "bytes":  70759,
+                      "sha256":  "9270F0B5476F3575E3D44EC11280AC528B16A33384DE59EF7D5DF7C771EC75F3"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\flamethrower.xnb",
+                      "bytes":  53351,
+                      "sha256":  "761EA151F9A4A37C367166D77701AC558E1FC263CB8C27ECD8905D962858E65F"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\grenade2.xnb",
+                      "bytes":  35943,
+                      "sha256":  "64307E17EC85006549C74A39F72CB68025AFC6F84627A3FB30DC735AFA52A591"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\health.xnb",
+                      "bytes":  33895,
+                      "sha256":  "F20113519B2D292D52E294C5351253D667D9782DDB8B75BE2E760387DCA78B8D"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\health2.xnb",
+                      "bytes":  41063,
+                      "sha256":  "E2BF48C6EC1BF56F1D513D7600F57A37FDD1E3F6FFE11BFCAEF6C9C198621AC7"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Hurt.xnb",
+                      "bytes":  35943,
+                      "sha256":  "F7EE1017E29A48986058F1144D39351CC296A9712F5DB076D127AC6E37824228"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Laser.xnb",
+                      "bytes":  14439,
+                      "sha256":  "6220822AB4B17BE7BEFAAD19CDF5FFA9FC6EF45ACF2C1FD22595B11963936D47"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\laserrifle.xnb",
+                      "bytes":  25703,
+                      "sha256":  "866118060942F61FC439DDC262FCB71AF718EBF0BAE194F489D3889C0C06D09E"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\lasershotgun.xnb",
+                      "bytes":  25703,
+                      "sha256":  "2906C75863DD1480DF96E258037D7FABA42EE9DB24D6ABCC1784EA51F57CBB2C"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\LightRifle.xnb",
+                      "bytes":  6247,
+                      "sha256":  "628EF89FA9CFADA48B69F66312FCE34749B7402A47866700716E2C7D6D1CB414"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\menu.xnb",
+                      "bytes":  8295,
+                      "sha256":  "EB1CDD73668027FABE067CA61225C1B30E503C8CA917A498A5CE93858DB258EA"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\minigun2.xnb",
+                      "bytes":  35943,
+                      "sha256":  "4003C2A5F16A281FD4D588F38F23643F074D6555016F8D62FA00B228B4985D8C"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\money.xnb",
+                      "bytes":  54375,
+                      "sha256":  "0A4F96EEB43AFCC2F6F64BF3C620B8F584D5D7284902FCF7BA59AF78D5558EF3"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\moo2.xnb",
+                      "bytes":  265319,
+                      "sha256":  "C233F0D6C579DF09439D37134176AC7E20EE6E8F6EBB19D713B979935CC0065A"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\moo3.xnb",
+                      "bytes":  133223,
+                      "sha256":  "B2AF64102640A918B42EBE95BE7959C961DC444D20B311228D4E5859C0AD9178"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\navsound1.xnb",
+                      "bytes":  43111,
+                      "sha256":  "7A9147B35EE20839EEFE97B024B2B0A00AE534CD70E528CE69C64779C7D2F5FE"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\navsound2.xnb",
+                      "bytes":  43111,
+                      "sha256":  "3747021E4A6CEBB84968563936B284B000DBBA5387839230E8E3C589956C1393"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Pistol.xnb",
+                      "bytes":  35943,
+                      "sha256":  "0FFDF4BBE322CE3EEDB696F7E18EEB21376E7140E6EA328973922D2F861B00E8"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\place.xnb",
+                      "bytes":  13415,
+                      "sha256":  "379A76C20AF1DA8CE23C6A1677F806064E2C5F3D1D164810FA2B7529C431CF94"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\pop.xnb",
+                      "bytes":  11367,
+                      "sha256":  "D59E04B4A5222C7A856FE013A8E649D8CB7CACB815989ED0473CB2F41DF6AEEA"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\res.xnb",
+                      "bytes":  106599,
+                      "sha256":  "8763AD9B9BB918E866514D32573AC83CB5FC79FDC713B571D5888F53B90DC404"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Rifle.xnb",
+                      "bytes":  35943,
+                      "sha256":  "3C4F0D2C15F8509E3B4AB1DAA47E71F1CFFED12F7BF7629B357A8162A33E9F6C"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\rocket.xnb",
+                      "bytes":  70759,
+                      "sha256":  "37D245DCDD700CEDE4090B67439FCD46391E29D69D211491ED54E8700C2B81C0"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Shotgun.xnb",
+                      "bytes":  45159,
+                      "sha256":  "91DAFB47E5B4F80E5E554BC3ADB3A6D3CF1C090A630008090B1C05B9B21771C7"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\SmallShot.xnb",
+                      "bytes":  35943,
+                      "sha256":  "4D3E59FFB27AF4888F246703482597A840B3E79B28566519DBCAA67F4872C724"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\snow.xnb",
+                      "bytes":  18535,
+                      "sha256":  "EF0AF65B36ACD645A3DD016F1B1AD3B97ADEA7764AA69BA9FCB222E58E631EB3"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\soak.xnb",
+                      "bytes":  30823,
+                      "sha256":  "4ACFB48C17D9490F3A45BC2F965A6FEF107FB092893D1E3B59D8BD284F287877"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\Something.xnb",
+                      "bytes":  35943,
+                      "sha256":  "A849D73249691EA11314BC9FAC14099FE872A68D53AF66EAB211ECAA8F40B711"
+                  },
+                  {
+                      "path":  "Content\\Sounds\\splat.xnb",
+                      "bytes":  29799,
+                      "sha256":  "7A1B25E650876D7E3789A97F8F1ED094DC4469EC1AFCF56356A61635451F5458"
+                  },
+                  {
+                      "path":  "Content\\StatsScreen.xnb",
+                      "bytes":  655445,
+                      "sha256":  "BDEF9FBBC6F2F3879B6EE387067962D6F0EEC8339DA837F716F67171FD29FB06"
+                  },
+                  {
+                      "path":  "Content\\StoreHUD.xnb",
+                      "bytes":  655445,
+                      "sha256":  "43690E6F1E5E19C3D95B13A7B611F66A74A1AD74E62A71D0164FC8D817840645"
+                  },
+                  {
+                      "path":  "Content\\TempDPAD.xnb",
+                      "bytes":  1048661,
+                      "sha256":  "512017A91F41E4118D997FACB324EB0597AE294553D75CEF88B12109938A8414"
+                  },
+                  {
+                      "path":  "Content\\TestMap_NEW.txt",
+                      "bytes":  68113,
+                      "sha256":  "02E5FD28348C23E01433FE21DC576CC33F5181B0E60A8206DBFC6E5E10A75EC2"
+                  },
+                  {
+                      "path":  "Content\\TestMapSpawns_NEW.txt",
+                      "bytes":  3903,
+                      "sha256":  "C06A9D0909F012C72FA7228798334B2CB4873541A31A289F3098E7163A36F101"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipAmmo.xnb",
+                      "bytes":  409685,
+                      "sha256":  "C425A4B7810F2F5FB144EFCA0CF6BB13A03855928390895F1B389D61D52BA99E"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipAmmoType.xnb",
+                      "bytes":  409685,
+                      "sha256":  "921FD26248FCE16011ED870A805C5B3B4FA2E9F763433D5B08979F50E0260E7B"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipHoly.xnb",
+                      "bytes":  409685,
+                      "sha256":  "2E303D7A5978125F33D819858AAF4743F593196340E47FEBE2FF2B2EF5AC033C"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipInventory.xnb",
+                      "bytes":  409685,
+                      "sha256":  "7D98664D9918AF871826B2590954A23B4537DDAEE9731AD6708E060AB6B9F341"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipLaser.xnb",
+                      "bytes":  409685,
+                      "sha256":  "42A04D815026A2167FB86668DA500360CDA33B9D783BBFB3E6570A709C2D63FC"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipMoney.xnb",
+                      "bytes":  409685,
+                      "sha256":  "9C708EF63E3187F502894396823F112823A5E9A14966F396FA53DE9C1DA2D32F"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipPistol.xnb",
+                      "bytes":  409685,
+                      "sha256":  "7FB9B6417B706E008EB599457103378C422F6AA3CB56C9BBE36012489A27FCC0"
+                  },
+                  {
+                      "path":  "Content\\Tips\\TipShop.xnb",
+                      "bytes":  409685,
+                      "sha256":  "A3D3B99B25A6CDA46D8CBDCADC0E296E5ED7D45513B3825F6AFEF7727F17E34D"
+                  },
+                  {
+                      "path":  "Content\\Title.xnb",
+                      "bytes":  3686485,
+                      "sha256":  "BC80C22E878D9A831A06EB5632428D92339B1F054BAC423E30D604A3DCCB70F8"
+                  },
+                  {
+                      "path":  "Content\\Two.xnb",
+                      "bytes":  1109,
+                      "sha256":  "1BF8F6831101E3A4D8A793B3CA4B6F45F6B5E86050B83641FDA457B1202D72F1"
+                  },
+                  {
+                      "path":  "Content\\Two_0.xnb",
+                      "bytes":  469,
+                      "sha256":  "855FC980C08986C198B775D830077B2AED1AB4745320E7FE802F1335F358F8FF"
+                  },
+                  {
+                      "path":  "Content\\UpArrow.xnb",
+                      "bytes":  4181,
+                      "sha256":  "EC142BD836E77B84D7F617F00EE4F77C67621FF6105F9BFF50F2C0697DEBB427"
+                  },
+                  {
+                      "path":  "Content\\UpStore.xnb",
+                      "bytes":  4181,
+                      "sha256":  "2765D8EDAA22F7A0E08BBA8034D32BAE7DDF9D1E911DAE839550342A4DEAC238"
+                  },
+                  {
+                      "path":  "Content\\WallTest.xnb",
+                      "bytes":  4181,
+                      "sha256":  "F87E5733D600F195E48785BFE963F092D45D46E4A35E2EC2155D17DDAE822ACB"
+                  },
+                  {
+                      "path":  "Content\\WheelBG.xnb",
+                      "bytes":  9301,
+                      "sha256":  "CC02E7C1288B7C2F29D84F2F294DAE6CDF7ED20C98646B23A55C0FB1D453F19D"
+                  },
+                  {
+                      "path":  "Content\\ZombieCount.xnb",
+                      "bytes":  32853,
+                      "sha256":  "500E8042623A4C663E79E9A92FD11340FDA2993DDA4FECB5D3C5C8311A7257A7"
+                  },
+                  {
+                      "path":  "FAudio.dll",
+                      "bytes":  181248,
+                      "sha256":  "31055CA691FE42C96EF651D6772CE4DD4E239294325B1F33414955A67BB1A13D"
+                  },
+                  {
+                      "path":  "FNA.dll",
+                      "bytes":  1202688,
+                      "sha256":  "3DC5047DB16D7FD1A1652501F9CC8583E02D48E1BB7CEF5F4E3CCA6E41DC3325"
+                  },
+                  {
+                      "path":  "FNA.dll.config",
+                      "bytes":  1072,
+                      "sha256":  "68F0813EA331C2BAE589596437E9340455F2F84F2BB98222C98F2DC8A4C70F18"
+                  },
+                  {
+                      "path":  "FNA.NetStub.dll",
+                      "bytes":  368640,
+                      "sha256":  "1E99E98475D90B4C800B4DAB383B1FE9A8892E2E1D4D55A4D959F46FC3E21DE3"
+                  },
+                  {
+                      "path":  "FNA3D.dll",
+                      "bytes":  396800,
+                      "sha256":  "D96612D02CB85149C283BBA04E6EBF70A936284F49C89271E51F75FF7A3A2C9A"
+                  },
+                  {
+                      "path":  "gamecontrollerdb.txt",
+                      "bytes":  592134,
+                      "sha256":  "F857275FE139DDF724EDE6500B7DC05AF20CDDB88EB1136A5A1218B33151C07C"
+                  },
+                  {
+                      "path":  "libtheorafile.dll",
+                      "bytes":  183296,
+                      "sha256":  "3A051116013E48BFDD4D515CEC8479D4BCF472162D6A5001660D3B2AD4A8976B"
+                  },
+                  {
+                      "path":  "Manor.txt",
+                      "bytes":  68122,
+                      "sha256":  "88522B0503BC453F9BC9B123A89198EEEE66EE4E5B960D171DBAD0AAF9C33B41"
+                  },
+                  {
+                      "path":  "ManorSpawns.txt",
+                      "bytes":  3828,
+                      "sha256":  "5B9FF164E0F67E1FAF2E66F0F562B149E969D070B75BEBCBE361D3080E425F6A"
+                  },
+                  {
+                      "path":  "OLDLEVELS\\House.txt",
+                      "bytes":  43136,
+                      "sha256":  "AC85B47BA888338F6A94A91CF7485AD9905CB24A5FB2B8F9EFB0A9DE56E26742"
+                  },
+                  {
+                      "path":  "OLDLEVELS\\House_Spawns.txt",
+                      "bytes":  3772,
+                      "sha256":  "D9D9A4DB73AC843B3F64FFCC98F0D42746F0A878C451AFCF7E095DF2FFF9A597"
+                  },
+                  {
+                      "path":  "OLDLEVELS\\PathMap_House.txt",
+                      "bytes":  3367936,
+                      "sha256":  "AC557199A00EC0530FEF0864F8476B3B9A16952E9ED4D1E8E696CB5111FE0070"
+                  },
+                  {
+                      "path":  "OLDLEVELS\\PathMap1.txt",
+                      "bytes":  3144704,
+                      "sha256":  "BC434C1EFD731000A9528FC28198E17E366620815A24F9A0ECBDF72A7F7BEC17"
+                  },
+                  {
+                      "path":  "PathMap_Manor.txt",
+                      "bytes":  3368928,
+                      "sha256":  "09BF9AB3C3E252BF3DB65EADD592317EC41A1E8DCDE6EF9A3F5AD39BF63FD7A4"
+                  },
+                  {
+                      "path":  "PathMap_New.txt",
+                      "bytes":  3368928,
+                      "sha256":  "C5D8C7C58A37AA9A70FD72F135E37BF1B82D43F3B8A7051F88838D5012294146"
+                  },
+                  {
+                      "path":  "Play Zombie Estate Windowed.cmd",
+                      "bytes":  415,
+                      "sha256":  "B6779B96116B4BB58825EE9DE4F1BF95C42BCE475D11261B95C963335461272B"
+                  },
+                  {
+                      "path":  "Play Zombie Estate.cmd",
+                      "bytes":  698,
+                      "sha256":  "54D3A22DCC9AFB3FE1E452290DDFDDC1FF8704D726EF4E4C9975E33FF3BF40D7"
+                  },
+                  {
+                      "path":  "README.md",
+                      "bytes":  1611,
+                      "sha256":  "BECE7E44A355524D2883C3A21860CDEA2388F5D84B368C4DA2401503E4DBB8BE"
+                  },
+                  {
+                      "path":  "SDL3.dll",
+                      "bytes":  2330624,
+                      "sha256":  "33DFA534C3EC4C63792B955C1769A534CCC03F10A7D564ACB74B9D2F052C068A"
+                  },
+                  {
+                      "path":  "TestMap.txt",
+                      "bytes":  43008,
+                      "sha256":  "A5CA59C5CC0059D01F40EECDFFB7E6F58E70BE50F5136D89B8DDCEB1B3AD73D9"
+                  },
+                  {
+                      "path":  "TestMap_NEW.txt",
+                      "bytes":  68113,
+                      "sha256":  "02E5FD28348C23E01433FE21DC576CC33F5181B0E60A8206DBFC6E5E10A75EC2"
+                  },
+                  {
+                      "path":  "TestMapSpawns_NEW.txt",
+                      "bytes":  3903,
+                      "sha256":  "C06A9D0909F012C72FA7228798334B2CB4873541A31A289F3098E7163A36F101"
+                  },
+                  {
+                      "path":  "XnaToFna.dll",
+                      "bytes":  156672,
+                      "sha256":  "E4C5E89F33C035C222A0BBDF680E15EDAC09649ED4E3BF0F6DDB6B834850118F"
+                  },
+                  {
+                      "path":  "ZombieEstate.exe",
+                      "bytes":  204288,
+                      "sha256":  "0E92884B80CFB3CCB9D5D6849E39FB142D995811DD5BC146D3948EF900C50C50"
+                  },
+                  {
+                      "path":  "ZombieEstate.exe.config",
+                      "bytes":  222,
+                      "sha256":  "2CC7F5286BD97F204292E44C06134F3AA9DEEF51506B2D1B9A7345D52A782C83"
+                  }
+              ]
+}

@@ -1,5 +1,17 @@
 #!/bin/bash
-# Double-click launcher for Zombie Estate.app
+# Double-click launcher for Zombie Estate.app (in repo folder)
 ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
-cd "$ROOT"
+cd "$ROOT" || exit 1
+export ZOMBIE_ESTATE_GUI_LAUNCH=1
+if /usr/bin/python3 - <<'PY' 2>/dev/null
+import Quartz
+flags = Quartz.CGEventSourceFlagsState(Quartz.kCGEventSourceStateCombinedSessionState)
+raise SystemExit(0 if (flags & Quartz.kCGEventFlagMaskAlternate) else 1)
+PY
+then
+  export ZOMBIE_ESTATE_ASK_AI=1
+fi
+# shellcheck disable=SC1091
+source "$ROOT/scripts/choose-ai-p2.sh"
+choose_ai_p2 "$ROOT"
 exec ./run-mac.sh

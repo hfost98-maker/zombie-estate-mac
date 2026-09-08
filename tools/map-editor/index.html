@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zombie Estate Map Editor</title>
+  <style>
+    :root {
+      --bg: #111418;
+      --panel: #1a1f26;
+      --panel-2: #222831;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --accent: #6b9bd1;
+      --border: #2f3640;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+    header {
+      display: flex; align-items: center; gap: 16px; padding: 10px 20px;
+      border-bottom: 1px solid var(--border); background: var(--panel); flex-wrap: wrap;
+    }
+    header h1 { margin: 0; font-size: 17px; }
+    .tabs { display: flex; gap: 4px; }
+    .tabs button {
+      background: transparent; border: 1px solid transparent; color: var(--muted);
+      padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px;
+    }
+    .tabs button.active { background: var(--panel-2); border-color: var(--border); color: var(--text); }
+    .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto; align-items: center; }
+    button, .btn {
+      background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+      border-radius: 6px; padding: 7px 12px; font-size: 13px; cursor: pointer;
+    }
+    button:hover { border-color: var(--accent); }
+    button.active { background: #2a3a4f; border-color: var(--accent); }
+    button.primary { background: #2d4a6a; border-color: var(--accent); }
+    input, select {
+      background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+      border-radius: 6px; padding: 7px 10px; font-size: 13px;
+    }
+    .status { font-size: 12px; color: var(--muted); }
+    .tab-panel { display: none; min-height: calc(100vh - 52px); }
+    .tab-panel.active { display: block; }
+
+    /* Assets tab */
+    .assets-layout { display: grid; grid-template-columns: 1fr 320px; min-height: calc(100vh - 52px); }
+    .catalog { overflow: auto; border-right: 1px solid var(--border); }
+    .controls {
+      padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap;
+      gap: 8px; align-items: center; background: var(--panel); position: sticky; top: 0; z-index: 2;
+    }
+    .controls input[type="search"] { flex: 1; min-width: 160px; }
+    .asset-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px; padding: 12px;
+    }
+    .asset-card {
+      border: 1px solid var(--border); border-radius: 8px; background: var(--panel-2);
+      padding: 6px; cursor: pointer;
+    }
+    .asset-card.selected { outline: 2px solid var(--accent); background: #243041; }
+    .asset-card canvas { width: 100%; aspect-ratio: 1; image-rendering: pixelated; border-radius: 4px; display: block; }
+    .asset-name { margin-top: 6px; font-size: 10px; line-height: 1.3; color: var(--text); }
+    .asset-src { font-size: 9px; color: var(--muted); margin-top: 2px; }
+    .detail { background: var(--panel); overflow: auto; padding: 14px; }
+    .preview-large { width: 140px; height: 140px; image-rendering: pixelated; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 12px; }
+    .detail h2 { margin: 0 0 4px; font-size: 15px; }
+    .detail .sub { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    dl { margin: 0; font-size: 12px; }
+    dt { color: var(--muted); margin-top: 8px; }
+    dd { margin: 2px 0 0; font-family: ui-monospace, Menlo, monospace; word-break: break-all; }
+    .line-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin-top: 10px; }
+    .line-cell { background: var(--panel-2); border: 1px solid var(--border); border-radius: 3px; padding: 3px; text-align: center; font-size: 10px; }
+
+    /* Map tab */
+    .map-layout { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 52px); }
+    .map-sidebar { background: var(--panel); border-right: 1px solid var(--border); padding: 14px; overflow: auto; }
+    .map-sidebar h3 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; }
+    .map-sidebar section { margin-bottom: 18px; }
+    .map-sidebar label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .map-sidebar select, .map-sidebar input { width: 100%; margin-bottom: 8px; }
+    .brush-preview { display: flex; align-items: center; gap: 10px; padding: 8px; background: var(--panel-2); border-radius: 8px; border: 1px solid var(--border); }
+    .brush-preview canvas { width: 48px; height: 48px; image-rendering: pixelated; border-radius: 4px; flex-shrink: 0; }
+    .brush-label { font-size: 11px; line-height: 1.35; }
+    .tool-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .map-stage {
+      padding: 16px; overflow: auto; display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    #mapCanvas {
+      border: 1px solid var(--border); cursor: crosshair; image-rendering: pixelated; background: #0a0c0f;
+    }
+    .map-toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .empty { padding: 16px; color: var(--muted); font-size: 13px; }
+
+    /* 3D preview tab */
+    .preview3d-layout { display: grid; grid-template-columns: 240px 1fr; min-height: calc(100vh - 52px); }
+    .preview3d-sidebar {
+      background: var(--panel); border-right: 1px solid var(--border); padding: 14px; overflow: auto;
+    }
+    .preview3d-sidebar h3 {
+      margin: 0 0 10px; font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em;
+    }
+    .preview3d-sidebar section { margin-bottom: 16px; }
+    .preview3d-sidebar p { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 0 0 10px; }
+    .preview3d-stage { position: relative; background: #0a0c0f; min-height: calc(100vh - 52px); }
+    #preview3dCanvas { display: block; width: 100%; height: calc(100vh - 52px); }
+    .preview3d-hint {
+      position: absolute; left: 12px; bottom: 12px; font-size: 11px; color: var(--muted);
+      background: rgba(26,31,38,0.85); padding: 8px 10px; border-radius: 6px; pointer-events: none;
+    }
+
+    /* Screenshot import */
+    .shot-layout { display: grid; grid-template-columns: 280px 1fr; min-height: calc(100vh - 52px); }
+    .shot-sidebar { background: var(--panel); border-right: 1px solid var(--border); padding: 14px; overflow: auto; }
+    .shot-sidebar h3 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; }
+    .shot-sidebar section { margin-bottom: 16px; }
+    .shot-sidebar p, .shot-sidebar ol { font-size: 12px; color: var(--muted); line-height: 1.55; margin: 0 0 8px; }
+    .shot-sidebar code { font-size: 11px; word-break: break-all; }
+    .shot-stage { padding: 14px; overflow: auto; }
+    #shotCanvas { max-width: 100%; border: 1px solid var(--border); cursor: crosshair; background: #0a0c0f; }
+    .shot-handle { position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+      background: var(--accent); border: 2px solid #fff; cursor: grab; z-index: 3; }
+    .shot-wrap { position: relative; display: inline-block; max-width: 100%; }
+
+    @media (max-width: 900px) {
+      .assets-layout, .map-layout, .preview3d-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Map Editor</h1>
+    <nav class="tabs">
+      <button id="tabAssets" class="active" data-tab="assets">Tile Assets</button>
+      <button id="tabMap" data-tab="map">Map Builder</button>
+      <button id="tabPreview3d" data-tab="preview3d">3D Preview</button>
+      <button id="tabScreenshot" data-tab="screenshot">Screenshot Import</button>
+    </nav>
+    <div class="toolbar">
+      <span id="status" class="status">Loading…</span>
+    </div>
+  </header>
+
+  <div id="panelAssets" class="tab-panel active">
+    <div class="assets-layout">
+      <section class="catalog">
+        <div class="controls">
+          <div id="mapFilters"></div>
+          <input id="search" type="search" placeholder="Search grass, hedge, shop…">
+        </div>
+        <div id="assetGrid" class="asset-grid"></div>
+      </section>
+      <aside class="detail" id="detailPanel">
+        <p class="empty">Select a tile asset. It becomes your paint brush in the Map Builder tab.</p>
+      </aside>
+    </div>
+  </div>
+
+  <div id="panelMap" class="tab-panel">
+    <div class="map-layout">
+      <aside class="map-sidebar">
+        <section>
+          <h3>Load existing map</h3>
+          <label for="loadMapSelect">Start from a built map</label>
+          <select id="loadMapSelect">
+            <option value="">— choose map —</option>
+            <option value="game/Manor.txt">Manor</option>
+            <option value="game/HedgeMaze.txt">Hedge Maze</option>
+            <option value="game/OpenField.txt">Open Field</option>
+            <option value="game/TestMap_NEW.txt">TestMap NEW</option>
+            <option value="game/Carnival.txt">Carnival</option>
+            <option value="__blank__">Blank (grass)</option>
+          </select>
+          <button id="btnLoadMap" style="width:100%">Load map</button>
+        </section>
+        <section>
+          <h3>Paint brush</h3>
+          <div class="brush-preview">
+            <canvas id="brushCanvas" width="48" height="48"></canvas>
+            <div class="brush-label" id="brushLabel">Pick a tile in Assets tab</div>
+          </div>
+        </section>
+        <section>
+          <h3>Tools</h3>
+          <div class="tool-row">
+            <button id="toolPaint" class="active" data-tool="paint">Paint</button>
+            <button id="toolFill" data-tool="fill">Fill</button>
+            <button id="toolPick" data-tool="pick">Pick</button>
+            <button id="toolErase" data-tool="erase">Erase</button>
+          </div>
+        </section>
+        <section>
+          <h3>Save new map</h3>
+          <label for="mapName">Map name</label>
+          <input id="mapName" type="text" value="CustomMap" placeholder="MyMap">
+          <button id="btnExport" class="primary" style="width:100%;margin-top:8px">Export map pack (.txt)</button>
+          <button id="btnExportJson" style="width:100%;margin-top:6px">Save project JSON</button>
+          <button id="btnClear" style="width:100%;margin-top:6px">Clear to grass</button>
+        </section>
+      </aside>
+      <section class="map-stage">
+        <div class="map-toolbar">
+          <label>Zoom <input id="zoomRange" type="range" min="10" max="24" value="16"></label>
+          <label><input id="showGrid" type="checkbox" checked> Grid</label>
+          <label><input id="showWalls" type="checkbox" checked> Walls</label>
+        </div>
+        <canvas id="mapCanvas" width="512" height="512"></canvas>
+        <p class="status">32×32 birds-eye view — load a map, edit with your selected brush, then export.</p>
+      </section>
+    </div>
+  </div>
+
+  <div id="panelPreview3d" class="tab-panel">
+    <div class="preview3d-layout">
+      <aside class="preview3d-sidebar">
+        <section>
+          <h3>Game preview</h3>
+          <p>Uses <code>MasterWallTexture</code> for both floor and walls (<code>Global.TESTWALL</code>). Floor art comes from tile lines 21–22; wall faces from lines 13–20. <code>MasterGrid</code> is only for UI and character sprites.</p>
+          <button id="btnRefresh3d" class="primary" style="width:100%">Refresh preview</button>
+        </section>
+        <section>
+          <h3>Camera</h3>
+          <label><input type="checkbox" id="preview3dSpin" checked> Slow orbit</label>
+          <label style="display:block;margin-top:8px">Height scale
+            <input id="preview3dHeight" type="range" min="0.5" max="2" step="0.1" value="1" style="width:100%">
+          </label>
+        </section>
+        <section>
+          <p><strong>Validate:</strong> Load Manor in Map Builder, open this tab, and compare to the in-game map. Matching Manor confirms custom maps preview correctly.</p>
+        </section>
+      </aside>
+      <section class="preview3d-stage">
+        <canvas id="preview3dCanvas"></canvas>
+        <div class="preview3d-hint">Drag to orbit · scroll to zoom · floor + wall coords from MasterWallTexture</div>
+      </section>
+    </div>
+  </div>
+
+  <div id="panelScreenshot" class="tab-panel">
+    <div class="shot-layout">
+      <aside class="shot-sidebar">
+        <section>
+          <h3>1. Align screenshot</h3>
+          <p>Upload an in-game or reference screenshot. Drag the four handles to the <strong>north, east, south, and west</strong> edges of the 32×32 map diamond.</p>
+          <input id="shotFile" type="file" accept="image/*" style="width:100%">
+        </section>
+        <section>
+          <h3>2. Export alignment</h3>
+          <label for="shotMapName">Map name</label>
+          <input id="shotMapName" type="text" value="ScreenshotMap" style="width:100%;margin-bottom:8px">
+          <button id="btnShotCorners" style="width:100%">Download corners JSON</button>
+          <p style="margin-top:10px">Then run in Terminal:</p>
+          <code id="shotCmd">python3 scripts/screenshot_to_assets.py YOUR_IMAGE.jpg --corners corners.json --name ScreenshotMap --pack-atlas</code>
+        </section>
+        <section>
+          <h3>3. Load generated map</h3>
+          <p>After the script finishes, load the <code>.map.json</code> from <code>tools/screenshot-import/</code> to edit in Map Builder and validate in 3D Preview.</p>
+          <input id="shotProjectFile" type="file" accept=".json,application/json" style="width:100%">
+        </section>
+        <section>
+          <h3>Tips</h3>
+          <ol>
+            <li>Use a clear full-map screenshot (like Manor).</li>
+            <li>Lower <code>--merge-threshold</code> keeps more detail; raise it for fewer tiles.</li>
+            <li>Always open <strong>3D Preview</strong> before exporting to game.</li>
+          </ol>
+        </section>
+      </aside>
+      <section class="shot-stage">
+        <div class="shot-wrap" id="shotWrap">
+          <canvas id="shotCanvas" width="800" height="600"></canvas>
+        </div>
+        <p class="status">Handles: top → right → bottom → left (map compass). Corners are saved for the Python asset extractor.</p>
+      </section>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script>
+    const GRID = 32;
+    const TILE_LINES = 22;
+    const PATH_SIZE = 1024;
+    const SUB = 32;
+    const ATLAS_CELL = 16;
+
+    let library = null;
+    let mapAtlas = null;
+    let blocks = [];
+    let blockById = new Map();
+    let defaultBlockId = null;
+    let selectedBlockId = null;
+    let mapFilter = "All";
+    let searchQuery = "";
+    let activeTab = "assets";
+    let tool = "paint";
+    let cellSize = 16;
+    let grid = [];
+    let rawTiles = null;
+    let hoverCell = null;
+    let isPainting = false;
+    let mapLoaded = false;
+    let preview3dDirty = true;
+    const idColors = {};
+
+    const canvas = document.getElementById("mapCanvas");
+    const ctx = canvas.getContext("2d");
+
+    function setStatus(msg) { document.getElementById("status").textContent = msg; }
+
+    function colorForId(id, fallback) {
+      return idColors[id] || library?.line22Legend?.[id]?.color || fallback || "#555";
+    }
+
+    function parseCoord(v) {
+      const n = Number.parseInt(String(v ?? ""), 10);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    async function loadMapAtlas() {
+      if (mapAtlas) return mapAtlas;
+      const img = new Image();
+      img.src = "assets/MasterWallTexture.png";
+      img.decoding = "async";
+      await img.decode();
+      mapAtlas = img;
+      return mapAtlas;
+    }
+
+    function drawAtlasCell(c, dx, dy, size, cx, cy) {
+      if (!mapAtlas) return false;
+      c.drawImage(mapAtlas, cx * ATLAS_CELL, cy * ATLAS_CELL, ATLAS_CELL, ATLAS_CELL, dx, dy, size, size);
+      return true;
+    }
+
+    function floorCoordFromLines(lines) {
+      return { x: parseCoord(lines[20]), y: parseCoord(lines[21]) };
+    }
+
+    function floorCoordFromBlock(block) {
+      return { x: parseCoord(block?.types?.[16]), y: parseCoord(block?.types?.[17]) };
+    }
+
+    function drawIdPattern(c, id, px, py, s) {
+      c.fillStyle = colorForId(id, "#888");
+      if (id === "1") {
+        c.fillRect(px + s * 0.3, py, s * 0.4, s);
+        c.fillRect(px, py + s * 0.2, s, s * 0.5);
+      } else if (id === "2") {
+        for (let i = 0; i < 3; i++) c.fillRect(px + i * s * 0.3, py + i * s * 0.2, s * 0.25, s * 0.25);
+      } else if (id === "4") {
+        for (let i = 0; i < 3; i++) c.fillRect(px, py + i * s * 0.32, s, s * 0.15);
+      } else if (id === "31") {
+        c.strokeStyle = colorForId("31");
+        c.lineWidth = 1;
+        c.beginPath();
+        c.moveTo(px, py); c.lineTo(px + s, py + s);
+        c.moveTo(px + s, py); c.lineTo(px, py + s);
+        c.stroke();
+      } else {
+        c.fillRect(px + s * 0.15, py + s * 0.15, s * 0.7, s * 0.7);
+      }
+    }
+
+    function drawTileVisual(c, block, x, y, size, walls, lines) {
+      if (!block) return;
+      const floor = lines ? floorCoordFromLines(lines) : floorCoordFromBlock(block);
+      if (!drawAtlasCell(c, x, y, size, floor.x, floor.y)) {
+        const types = block.types;
+        const line22 = types[17];
+        c.fillStyle = colorForId(line22, block.color);
+        c.fillRect(x, y, size, size);
+      }
+      for (let i = 0; i < 17; i++) {
+        const id = block.types[i];
+        if (id === "0") continue;
+        const col = i % 4, row = Math.floor(i / 4), patch = size / 4.5;
+        drawIdPattern(c, id, x + col * (size / 4) + patch * 0.15, y + row * (size / 4) + patch * 0.15, patch);
+      }
+      if (block.isStore) {
+        c.fillStyle = "#ffd166";
+        c.fillRect(x + size / 2 - 2, y + size / 2 - 2, 4, 4);
+      }
+      if (block.isGate) {
+        c.strokeStyle = "#ffd166";
+        c.strokeRect(x + size * 0.15, y + size * 0.15, size * 0.7, size * 0.7);
+      }
+      if (walls) {
+        const [r, t, l, b] = walls;
+        c.strokeStyle = "#fff";
+        c.lineWidth = Math.max(1, size / 14);
+        if (r) { c.beginPath(); c.moveTo(x + size - 1, y); c.lineTo(x + size - 1, y + size); c.stroke(); }
+        if (t) { c.beginPath(); c.moveTo(x, y); c.lineTo(x + size, y); c.stroke(); }
+        if (l) { c.beginPath(); c.moveTo(x, y); c.lineTo(x, y + size); c.stroke(); }
+        if (b) { c.beginPath(); c.moveTo(x, y + size - 1); c.lineTo(x + size, y + size - 1); c.stroke(); }
+      }
+    }
+
+    function renderThumb(block, el) {
+      const c = el.getContext("2d");
+      const s = el.width;
+      c.clearRect(0, 0, s, s);
+      drawTileVisual(c, block, 0, 0, s, null);
+    }
+
+    function blockAt(x, y) {
+      return blockById.get(grid[y][x]) || blockById.get(defaultBlockId);
+    }
+
+    function isBlocked(block) { return !!block?.blocked; }
+
+    function wallFlags(x, y) {
+      if (isBlocked(blockAt(x, y))) return [0, 1, 0, 1];
+      return [
+        x + 1 >= GRID || isBlocked(blockAt(x + 1, y)) ? 1 : 0,
+        y - 1 < 0 || isBlocked(blockAt(x, y - 1)) ? 1 : 0,
+        x - 1 < 0 || isBlocked(blockAt(x - 1, y)) ? 1 : 0,
+        y + 1 >= GRID || isBlocked(blockAt(x, y + 1)) ? 1 : 0,
+      ];
+    }
+
+    function composeTile(x, y) {
+      const block = blockAt(x, y);
+      return wallFlags(x, y).map(String).concat(block.types);
+    }
+
+    function matchBlockId(types) {
+      let bestId = defaultBlockId, best = -1;
+      for (const block of blocks) {
+        let score = 0;
+        for (let i = 0; i < 18; i++) if (block.types[i] === types[i]) score++;
+        if (score > best) { best = score; bestId = block.id; }
+      }
+      return bestId;
+    }
+
+    function markPreview3dDirty() { preview3dDirty = true; }
+
+    function initGrid(fillId) {
+      grid = Array.from({ length: GRID }, () => Array(GRID).fill(fillId || defaultBlockId));
+      rawTiles = null;
+      mapLoaded = true;
+      markPreview3dDirty();
+    }
+
+    function setRawTile(x, y, lines) {
+      if (!rawTiles) {
+        rawTiles = Array.from({ length: GRID }, () => Array.from({ length: GRID }, () => null));
+      }
+      rawTiles[y][x] = lines.slice();
+    }
+
+    function tileLinesAt(x, y) {
+      if (rawTiles?.[y]?.[x]) return rawTiles[y][x];
+      return composeTile(x, y);
+    }
+
+    function parseMapText(text) {
+      const lines = text.split(/\r?\n/).filter(l => l.length > 0);
+      if (lines.length !== GRID * GRID * TILE_LINES) {
+        throw new Error(`Expected ${GRID * GRID * TILE_LINES} lines, got ${lines.length}`);
+      }
+      initGrid(defaultBlockId);
+      for (let y = 0; y < GRID; y++) {
+        for (let x = 0; x < GRID; x++) {
+          const base = (y * GRID + x) * TILE_LINES;
+          const tileLines = lines.slice(base, base + TILE_LINES);
+          setRawTile(x, y, tileLines);
+          grid[y][x] = matchBlockId(tileLines.slice(4, TILE_LINES));
+        }
+      }
+    }
+
+    async function loadMapFromPath(path) {
+      if (path === "__blank__") {
+        initGrid(defaultBlockId);
+        redrawMap();
+        setStatus("Blank grass map ready");
+        return;
+      }
+      const res = await fetch("/" + path);
+      if (!res.ok) throw new Error("Could not load " + path);
+      parseMapText(await res.text());
+      redrawMap();
+      const name = path.split("/").pop().replace(".txt", "");
+      setStatus("Loaded " + name);
+    }
+
+    function redrawMap() {
+      if (!mapLoaded) return;
+      cellSize = Number(document.getElementById("zoomRange").value);
+      canvas.width = GRID * cellSize;
+      canvas.height = GRID * cellSize;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const showWalls = document.getElementById("showWalls").checked;
+      for (let y = 0; y < GRID; y++) {
+        for (let x = 0; x < GRID; x++) {
+          drawTileVisual(ctx, blockAt(x, y), x * cellSize, y * cellSize, cellSize, showWalls ? wallFlags(x, y) : null, tileLinesAt(x, y));
+        }
+      }
+      if (document.getElementById("showGrid").checked) {
+        ctx.strokeStyle = "rgba(255,255,255,0.07)";
+        for (let i = 0; i <= GRID; i++) {
+          ctx.beginPath(); ctx.moveTo(i * cellSize, 0); ctx.lineTo(i * cellSize, canvas.height); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(0, i * cellSize); ctx.lineTo(canvas.width, i * cellSize); ctx.stroke();
+        }
+      }
+      if (hoverCell) {
+        ctx.fillStyle = "rgba(107,155,209,0.3)";
+        ctx.fillRect(hoverCell.x * cellSize, hoverCell.y * cellSize, cellSize, cellSize);
+      }
+    }
+
+    function updateBrushPreview() {
+      const block = blockById.get(selectedBlockId);
+      const label = document.getElementById("brushLabel");
+      const bc = document.getElementById("brushCanvas");
+      if (!block) {
+        label.textContent = "Pick a tile in Assets tab";
+        bc.getContext("2d").clearRect(0, 0, 48, 48);
+        return;
+      }
+      renderThumb(block, bc);
+      label.textContent = block.name.split(" · ")[0];
+    }
+
+    function selectBlock(id) {
+      if (!blockById.has(id)) return;
+      selectedBlockId = id;
+      renderAssetGrid();
+      renderDetail();
+      updateBrushPreview();
+    }
+
+    async function loadLibrary() {
+      const res = await fetch("templates.json");
+      if (!res.ok) throw new Error("Run scripts/build-map-template-library.py");
+      library = await res.json();
+      Object.assign(idColors, library.idColors || {});
+      blocks = library.blocks || [];
+      blockById = new Map(blocks.map(b => [b.id, b]));
+      defaultBlockId = library.defaultBlockId || blocks[0].id;
+      selectedBlockId = defaultBlockId;
+      initGrid(defaultBlockId);
+      try {
+        await loadMapAtlas();
+      } catch (_) {
+        setStatus("Run scripts/extract-xnb-texture.py for floor/wall previews");
+      }
+      renderFilters();
+      renderAssetGrid();
+      updateBrushPreview();
+      redrawMap();
+      setStatus(`${blocks.length} assets · ${library.sourceMaps.join(", ")}`);
+    }
+
+    function renderFilters() {
+      const el = document.getElementById("mapFilters");
+      el.innerHTML = "";
+      for (const name of library.mapFilters || ["All"]) {
+        const btn = document.createElement("button");
+        btn.textContent = name;
+        btn.classList.toggle("active", name === mapFilter);
+        btn.onclick = () => { mapFilter = name; renderFilters(); renderAssetGrid(); };
+        el.appendChild(btn);
+      }
+    }
+
+    function filteredBlocks() {
+      const q = searchQuery.trim().toLowerCase();
+      return blocks.filter(b => {
+        if (mapFilter !== "All") {
+          if (b.primaryMap !== mapFilter && !b.sources.some(s => s.map === mapFilter)) return false;
+        }
+        if (!q) return true;
+        return [b.name, b.line22Name, b.primaryMap, b.category].join(" ").toLowerCase().includes(q);
+      });
+    }
+
+    function renderAssetGrid() {
+      const el = document.getElementById("assetGrid");
+      el.innerHTML = "";
+      for (const block of filteredBlocks()) {
+        const card = document.createElement("div");
+        card.className = "asset-card" + (block.id === selectedBlockId ? " selected" : "");
+        const cv = document.createElement("canvas");
+        cv.width = cv.height = 80;
+        renderThumb(block, cv);
+        const name = document.createElement("div");
+        name.className = "asset-name";
+        name.textContent = block.name.split(" · ")[0];
+        const src = document.createElement("div");
+        src.className = "asset-src";
+        const s0 = block.sources[0];
+        src.textContent = `${s0.map} (${s0.x},${s0.y})`;
+        card.onclick = () => selectBlock(block.id);
+        card.appendChild(cv);
+        card.appendChild(name);
+        card.appendChild(src);
+        el.appendChild(card);
+      }
+    }
+
+    function renderDetail() {
+      const panel = document.getElementById("detailPanel");
+      const block = blockById.get(selectedBlockId);
+      if (!block) { panel.innerHTML = "<p class='empty'>Select a tile asset.</p>"; return; }
+      const tile = (block.blocked ? ["0","1","0","1"] : ["0","0","0","0"]).concat(block.types);
+      const floor = floorCoordFromBlock(block);
+      panel.innerHTML = `
+        <canvas id="largePreview" class="preview-large" width="140" height="140"></canvas>
+        <h2>${block.name.split(" · ")[0]}</h2>
+        <div class="sub">${block.line22Name} · L22=${block.line22} · ${block.blocked ? "blocked" : "walkable"}</div>
+        <div class="actions">
+          <button id="useBrush" class="primary">Use as brush</button>
+          <button id="goMap">Open Map Builder</button>
+          <button id="goPreview3d">3D Preview</button>
+        </div>
+        <dl>
+          <dt>Source</dt><dd>${block.sources.map(s => `${s.map} (${s.x},${s.y})`).join(", ")}</dd>
+          <dt>Floor texture</dt><dd>MasterWallTexture (${floor.x}, ${floor.y}) · tile lines 21–22</dd>
+          <dt>Wall textures</dt><dd>lines 13–20 (right, top, left, bottom)</dd>
+        </dl>
+        <div class="line-grid">${tile.map((v,i) => `<div class="line-cell">${v}</div>`).join("")}</div>`;
+      renderThumb(block, document.getElementById("largePreview"));
+      document.getElementById("useBrush").onclick = () => { selectBlock(block.id); setStatus("Brush selected"); };
+      document.getElementById("goMap").onclick = () => switchTab("map");
+      document.getElementById("goPreview3d").onclick = () => switchTab("preview3d");
+    }
+
+    function mergeScreenshotBlocks(extra) {
+      if (!extra?.blocks?.length) return;
+      for (const b of extra.blocks) {
+        if (!blockById.has(b.id)) {
+          blocks.push(b);
+          blockById.set(b.id, b);
+        }
+      }
+      renderAssetGrid();
+      setStatus(`Merged ${extra.blocks.length} screenshot assets (${blocks.length} total)`);
+    }
+
+    async function loadScreenshotProject(file) {
+      const text = await file.text();
+      const payload = JSON.parse(text);
+      if (payload.screenshotBlocks) {
+        try {
+          const res = await fetch("/" + payload.screenshotBlocks);
+          if (res.ok) mergeScreenshotBlocks(await res.json());
+        } catch (_) { /* local file load only */ }
+      }
+      if (Array.isArray(payload.blocks)) mergeScreenshotBlocks(payload);
+      if (payload.grid) {
+        grid = payload.grid;
+        defaultBlockId = payload.defaultBlockId || defaultBlockId;
+        selectedBlockId = defaultBlockId;
+        rawTiles = null;
+        mapLoaded = true;
+        markPreview3dDirty();
+        document.getElementById("mapName").value = payload.name || "ScreenshotMap";
+        redrawMap();
+        switchTab("map");
+        setStatus("Loaded screenshot project — validate in 3D Preview");
+      }
+    }
+
+    function switchTab(tab) {
+      activeTab = tab;
+      document.getElementById("tabAssets").classList.toggle("active", tab === "assets");
+      document.getElementById("tabMap").classList.toggle("active", tab === "map");
+      document.getElementById("tabPreview3d").classList.toggle("active", tab === "preview3d");
+      document.getElementById("tabScreenshot").classList.toggle("active", tab === "screenshot");
+      document.getElementById("panelAssets").classList.toggle("active", tab === "assets");
+      document.getElementById("panelMap").classList.toggle("active", tab === "map");
+      document.getElementById("panelPreview3d").classList.toggle("active", tab === "preview3d");
+      document.getElementById("panelScreenshot").classList.toggle("active", tab === "screenshot");
+      if (tab === "map") redrawMap();
+      if (tab === "preview3d" && window.preview3dApi) window.preview3dApi.show();
+      if (tab === "screenshot") drawShotCanvas();
+    }
+
+    window.mapEditor = {
+      get GRID() { return GRID; },
+      get mapLoaded() { return mapLoaded; },
+      get preview3dDirty() { return preview3dDirty; },
+      setPreview3dDirty(v) { preview3dDirty = v; },
+      blockAt, wallFlags, isBlocked, colorForId, tileLinesAt,
+      getHeightScale() {
+        return Number(document.getElementById("preview3dHeight")?.value || 1);
+      },
+      getSpinEnabled() {
+        return document.getElementById("preview3dSpin")?.checked !== false;
+      },
+    };
+
+    function cellFromEvent(ev) {
+      const rect = canvas.getBoundingClientRect();
+      const x = Math.floor((ev.clientX - rect.left) / cellSize);
+      const y = Math.floor((ev.clientY - rect.top) / cellSize);
+      if (x < 0 || y < 0 || x >= GRID || y >= GRID) return null;
+      return { x, y };
+    }
+
+    function paintCell(x, y) {
+      grid[y][x] = tool === "erase" ? defaultBlockId : selectedBlockId;
+      const block = blockById.get(grid[y][x]);
+      if (block) {
+        const walls = wallFlags(x, y);
+        setRawTile(x, y, walls.map(String).concat(block.types));
+      }
+      markPreview3dDirty();
+      redrawMap();
+    }
+
+    function floodFill(sx, sy, from, to) {
+      if (from === to) return;
+      const stack = [[sx, sy]];
+      const seen = new Set();
+      while (stack.length) {
+        const [x, y] = stack.pop();
+        const k = x + "," + y;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        if (grid[y][x] !== from) continue;
+        grid[y][x] = to;
+        const block = blockById.get(to);
+        if (block) setRawTile(x, y, wallFlags(x, y).map(String).concat(block.types));
+        if (x > 0) stack.push([x - 1, y]);
+        if (x < GRID - 1) stack.push([x + 1, y]);
+        if (y > 0) stack.push([x, y - 1]);
+        if (y < GRID - 1) stack.push([x, y + 1]);
+      }
+    }
+
+    function handleMapClick(x, y) {
+      if (tool === "pick") {
+        selectBlock(grid[y][x]);
+        tool = "paint";
+        syncTools();
+      } else if (tool === "fill") {
+        floodFill(x, y, grid[y][x], selectedBlockId);
+        markPreview3dDirty();
+        redrawMap();
+      } else {
+        paintCell(x, y);
+      }
+    }
+
+    function syncTools() {
+      document.querySelectorAll("[data-tool]").forEach(b => b.classList.toggle("active", b.dataset.tool === tool));
+    }
+
+    function buildLevelLines() {
+      const lines = [];
+      for (let y = 0; y < GRID; y++) {
+        for (let x = 0; x < GRID; x++) {
+          lines.push(...(rawTiles?.[y]?.[x] || composeTile(x, y)));
+        }
+      }
+      return lines;
+    }
+
+    function buildSpawns() {
+      const spawns = Array(GRID * GRID).fill(-1);
+      [[14,2],[15,2],[16,2],[15,3],[14,3],[16,3]].forEach(([x,y], i) => spawns[y * GRID + x] = i % 3);
+      let zid = 3;
+      for (let y = 1; y < GRID - 1; y++) {
+        for (let x = 1; x < GRID - 1; x++) {
+          const idx = y * GRID + x;
+          if (spawns[idx] !== -1 || isBlocked(blockAt(x, y))) continue;
+          if ((x + y) % 4 === 0) { spawns[idx] = zid; zid = zid >= 4 ? 3 : zid + 1; }
+        }
+      }
+      return spawns;
+    }
+
+    function buildPathMap() {
+      const blocked = Array.from({ length: PATH_SIZE }, () => Array(PATH_SIZE).fill(false));
+      const path = Array(PATH_SIZE * PATH_SIZE).fill(0);
+      for (let ty = 0; ty < GRID; ty++) {
+        for (let tx = 0; tx < GRID; tx++) {
+          if (!isBlocked(blockAt(tx, ty))) continue;
+          for (let sy = 0; sy < SUB; sy++) for (let sx = 0; sx < SUB; sx++) {
+            const py = ty * SUB + sy, px = tx * SUB + sx;
+            blocked[py][px] = true;
+            path[py * PATH_SIZE + px] = 10;
+          }
+        }
+      }
+      const cx = 16 * SUB + 16, cy = 16 * SUB + 16;
+      const dist = Array.from({ length: PATH_SIZE }, () => Array(PATH_SIZE).fill(-1));
+      const q = [[cx, cy]];
+      dist[cy][cx] = 0;
+      const dirs = [[0,-1],[1,0],[0,1],[-1,0]], vals = [1,2,3,4];
+      while (q.length) {
+        const [x, y] = q.shift();
+        for (const [dx, dy] of dirs) {
+          const nx = x + dx, ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= PATH_SIZE || ny >= PATH_SIZE) continue;
+          if (blocked[ny][nx] || dist[ny][nx] !== -1) continue;
+          dist[ny][nx] = dist[y][x] + 1;
+          q.push([nx, ny]);
+        }
+      }
+      for (let y = 0; y < PATH_SIZE; y++) {
+        for (let x = 0; x < PATH_SIZE; x++) {
+          if (blocked[y][x]) continue;
+          let bestVal = 0, bestD = dist[y][x];
+          for (let i = 0; i < 4; i++) {
+            const nx = x + dirs[i][0], ny = y + dirs[i][1];
+            if (nx < 0 || ny < 0 || nx >= PATH_SIZE || ny >= PATH_SIZE) continue;
+            if (dist[ny][nx] >= 0 && dist[ny][nx] < bestD) { bestD = dist[ny][nx]; bestVal = vals[i]; }
+          }
+          if (bestVal) { path[y * PATH_SIZE + x] = bestVal; continue; }
+          if (dist[y][x] < 0) { path[y * PATH_SIZE + x] = 10; continue; }
+          let set = false;
+          for (let i = 0; i < 4; i++) {
+            const nx = x + dirs[i][0], ny = y + dirs[i][1];
+            if (nx >= 0 && ny >= 0 && nx < PATH_SIZE && ny < PATH_SIZE && dist[ny][nx] >= 0) {
+              path[y * PATH_SIZE + x] = vals[i]; set = true; break;
+            }
+          }
+          if (!set) path[y * PATH_SIZE + x] = 10;
+        }
+      }
+      return path;
+    }
+
+    function downloadText(name, content) {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([content], { type: "text/plain" }));
+      a.download = name;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }
+
+    function exportMapPack() {
+      const name = (document.getElementById("mapName").value.trim() || "CustomMap").replace(/\s+/g, "");
+      downloadText(name + ".txt", buildLevelLines().join("\n") + "\n");
+      downloadText(name + "Spawns.txt", buildSpawns().join("\n") + "\n");
+      downloadText("PathMap_" + name + ".txt", buildPathMap().join("\n") + "\n");
+      setStatus("Exported " + name + " map pack");
+    }
+
+    function exportProjectJson() {
+      const name = document.getElementById("mapName").value.trim() || "CustomMap";
+      downloadText(name.replace(/\s+/g, "") + ".map.json", JSON.stringify({ version: 2, name, defaultBlockId, grid }, null, 2));
+      setStatus("Saved project JSON");
+    }
+
+    // Events
+    document.getElementById("tabAssets").onclick = () => switchTab("assets");
+    document.getElementById("tabMap").onclick = () => switchTab("map");
+    document.getElementById("tabPreview3d").onclick = () => switchTab("preview3d");
+    document.getElementById("search").oninput = (ev) => { searchQuery = ev.target.value; renderAssetGrid(); };
+    document.getElementById("btnLoadMap").onclick = async () => {
+      const path = document.getElementById("loadMapSelect").value;
+      if (!path) { setStatus("Choose a map to load"); return; }
+      try { await loadMapFromPath(path); switchTab("map"); }
+      catch (err) { setStatus("Load failed: " + err.message); }
+    };
+    document.querySelectorAll("[data-tool]").forEach(btn => {
+      btn.onclick = () => { tool = btn.dataset.tool; syncTools(); };
+    });
+    document.getElementById("zoomRange").oninput = redrawMap;
+    document.getElementById("showGrid").onchange = redrawMap;
+    document.getElementById("showWalls").onchange = redrawMap;
+    document.getElementById("btnExport").onclick = exportMapPack;
+    document.getElementById("btnExportJson").onclick = exportProjectJson;
+    document.getElementById("btnClear").onclick = () => {
+      initGrid(defaultBlockId);
+      redrawMap();
+      setStatus("Cleared to grass");
+    };
+    document.getElementById("btnRefresh3d").onclick = () => {
+      markPreview3dDirty();
+      if (window.preview3dApi) window.preview3dApi.rebuild();
+    };
+    document.getElementById("preview3dHeight").oninput = () => {
+      markPreview3dDirty();
+      if (activeTab === "preview3d" && window.preview3dApi) window.preview3dApi.rebuild();
+    };
+
+    canvas.addEventListener("mousedown", (ev) => {
+      isPainting = true;
+      const cell = cellFromEvent(ev);
+      if (cell) handleMapClick(cell.x, cell.y);
+    });
+    canvas.addEventListener("mousemove", (ev) => {
+      hoverCell = cellFromEvent(ev);
+      if (isPainting && hoverCell && (tool === "paint" || tool === "erase")) handleMapClick(hoverCell.x, hoverCell.y);
+      else redrawMap();
+    });
+    window.addEventListener("mouseup", () => { isPainting = false; });
+
+    // --- Screenshot import (align 4 corners → corners JSON for screenshot_to_assets.py) ---
+    const shotCanvas = document.getElementById("shotCanvas");
+    const shotCtx = shotCanvas.getContext("2d");
+    let shotImage = null;
+    let shotCorners = [];
+    let shotDrag = -1;
+    let shotScale = 1;
+
+    function defaultShotCorners(w, h) {
+      return [
+        { x: w * 0.5, y: h * 0.08, label: "N" },
+        { x: w * 0.92, y: h * 0.5, label: "E" },
+        { x: w * 0.5, y: h * 0.92, label: "S" },
+        { x: w * 0.08, y: h * 0.5, label: "W" },
+      ];
+    }
+
+    function drawShotCanvas() {
+      if (!shotImage) {
+        shotCtx.fillStyle = "#0a0c0f";
+        shotCtx.fillRect(0, 0, shotCanvas.width, shotCanvas.height);
+        shotCtx.fillStyle = "#666";
+        shotCtx.font = "14px sans-serif";
+        shotCtx.fillText("Upload a screenshot to align map corners", 40, 40);
+        return;
+      }
+      const maxW = Math.min(window.innerWidth - 340, 960);
+      shotScale = Math.min(1, maxW / shotImage.width);
+      const dw = shotImage.width * shotScale;
+      const dh = shotImage.height * shotScale;
+      shotCanvas.width = dw;
+      shotCanvas.height = dh;
+      shotCtx.drawImage(shotImage, 0, 0, dw, dh);
+      shotCtx.strokeStyle = "rgba(107,155,209,0.9)";
+      shotCtx.lineWidth = 2;
+      shotCtx.beginPath();
+      for (let i = 0; i < shotCorners.length; i++) {
+        const p = shotCorners[i];
+        const px = p.x * shotScale, py = p.y * shotScale;
+        if (i === 0) shotCtx.moveTo(px, py); else shotCtx.lineTo(px, py);
+      }
+      shotCtx.closePath();
+      shotCtx.stroke();
+      for (const p of shotCorners) {
+        const px = p.x * shotScale, py = p.y * shotScale;
+        shotCtx.fillStyle = "#6b9bd1";
+        shotCtx.beginPath();
+        shotCtx.arc(px, py, 7, 0, Math.PI * 2);
+        shotCtx.fill();
+        shotCtx.strokeStyle = "#fff";
+        shotCtx.stroke();
+        shotCtx.fillStyle = "#fff";
+        shotCtx.font = "bold 11px sans-serif";
+        shotCtx.fillText(p.label, px + 10, py - 8);
+      }
+    }
+
+    function shotCanvasPoint(ev) {
+      const rect = shotCanvas.getBoundingClientRect();
+      return { x: (ev.clientX - rect.left) / shotScale, y: (ev.clientY - rect.top) / shotScale };
+    }
+
+    function nearestShotCorner(pt) {
+      let best = -1, bestD = 36;
+      shotCorners.forEach((c, i) => {
+        const d = (c.x - pt.x) ** 2 + (c.y - pt.y) ** 2;
+        if (d < bestD) { bestD = d; best = i; }
+      });
+      return best;
+    }
+
+    document.getElementById("shotFile").onchange = (ev) => {
+      const file = ev.target.files?.[0];
+      if (!file) return;
+      const img = new Image();
+      img.onload = () => {
+        shotImage = img;
+        shotCorners = defaultShotCorners(img.width, img.height);
+        drawShotCanvas();
+        const name = (file.name.replace(/\.[^.]+$/, "") || "ScreenshotMap").replace(/\s+/g, "");
+        document.getElementById("shotMapName").value = name;
+        document.getElementById("shotCmd").textContent =
+          `python3 scripts/screenshot_to_assets.py "${file.name}" --corners last-corners.json --name ${name} --pack-atlas`;
+        setStatus("Drag N/E/S/W handles to the map diamond edges");
+      };
+      img.src = URL.createObjectURL(file);
+    };
+
+    shotCanvas.addEventListener("mousedown", (ev) => {
+      if (!shotImage) return;
+      shotDrag = nearestShotCorner(shotCanvasPoint(ev));
+    });
+    shotCanvas.addEventListener("mousemove", (ev) => {
+      if (shotDrag < 0 || !shotImage) return;
+      const pt = shotCanvasPoint(ev);
+      shotCorners[shotDrag].x = Math.max(0, Math.min(shotImage.width, pt.x));
+      shotCorners[shotDrag].y = Math.max(0, Math.min(shotImage.height, pt.y));
+      drawShotCanvas();
+    });
+    window.addEventListener("mouseup", () => { shotDrag = -1; });
+
+    document.getElementById("btnShotCorners").onclick = () => {
+      if (!shotImage) { setStatus("Upload a screenshot first"); return; }
+      const name = document.getElementById("shotMapName").value.trim() || "ScreenshotMap";
+      const payload = {
+        imageWidth: shotImage.width,
+        imageHeight: shotImage.height,
+        corners: shotCorners.map(c => [c.x, c.y]),
+      };
+      downloadText("last-corners.json", JSON.stringify(payload, null, 2));
+      document.getElementById("shotCmd").textContent =
+        `python3 scripts/screenshot_to_assets.py YOUR_IMAGE --corners last-corners.json --name ${name.replace(/\s+/g, "")} --pack-atlas`;
+      setStatus("Downloaded last-corners.json — run the terminal command");
+    };
+
+    document.getElementById("shotProjectFile").onchange = (ev) => {
+      const file = ev.target.files?.[0];
+      if (file) loadScreenshotProject(file).catch(err => setStatus("Load failed: " + err.message));
+    };
+
+    document.getElementById("tabScreenshot").onclick = () => switchTab("screenshot");
+
+    loadLibrary().catch(err => setStatus("Error: " + err.message));
+  </script>
+
+  <script type="module">
+    import { createGamePreview } from "./game-preview.js?v=3";
+
+    const preview = createGamePreview(document.getElementById("preview3dCanvas"));
+    preview.setStatusElement(document.getElementById("status"));
+
+    window.preview3dApi = {
+      show() { return preview.show(); },
+      rebuild() { return preview.rebuild(); },
+      hide() { return preview.hide(); },
+    };
+  </script>
+</body>
+</html>

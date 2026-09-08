@@ -1,0 +1,463 @@
+{
+  "version": 1,
+  "source": "ManorReference",
+  "defaultBlockId": "ss_000",
+  "blocks": [
+    {
+      "id": "ss_000",
+      "name": "Screenshot 0 (0,24)",
+      "category": "boundaries",
+      "line22": 31,
+      "line22Name": "imported",
+      "color": "#364622",
+      "blocked": true,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "24",
+        "0",
+        "24",
+        "0",
+        "24",
+        "0",
+        "24",
+        "0",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_001",
+      "name": "Screenshot 1 (1,24)",
+      "category": "terrain",
+      "line22": 1,
+      "line22Name": "imported",
+      "color": "#7b623e",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_002",
+      "name": "Screenshot 2 (2,24)",
+      "category": "terrain",
+      "line22": 0,
+      "line22Name": "imported",
+      "color": "#727da1",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "2",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_003",
+      "name": "Screenshot 3 (3,24)",
+      "category": "boundaries",
+      "line22": 31,
+      "line22Name": "imported",
+      "color": "#676e89",
+      "blocked": true,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "3",
+        "24",
+        "3",
+        "24",
+        "3",
+        "24",
+        "3",
+        "24",
+        "3",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_004",
+      "name": "Screenshot 4 (4,24)",
+      "category": "boundaries",
+      "line22": 5,
+      "line22Name": "imported",
+      "color": "#8e564b",
+      "blocked": true,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "4",
+        "24",
+        "4",
+        "24",
+        "4",
+        "24",
+        "4",
+        "24",
+        "4",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_005",
+      "name": "Screenshot 5 (5,24)",
+      "category": "terrain",
+      "line22": 1,
+      "line22Name": "imported",
+      "color": "#9b7841",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "5",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_006",
+      "name": "Screenshot 6 (6,24)",
+      "category": "terrain",
+      "line22": 1,
+      "line22Name": "imported",
+      "color": "#967165",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "6",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_007",
+      "name": "Screenshot 7 (7,24)",
+      "category": "boundaries",
+      "line22": 5,
+      "line22Name": "imported",
+      "color": "#a16e4c",
+      "blocked": true,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "7",
+        "24",
+        "7",
+        "24",
+        "7",
+        "24",
+        "7",
+        "24",
+        "7",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_008",
+      "name": "Screenshot 8 (8,24)",
+      "category": "terrain",
+      "line22": 1,
+      "line22Name": "imported",
+      "color": "#a88142",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "8",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_009",
+      "name": "Screenshot 9 (9,24)",
+      "category": "terrain",
+      "line22": 1,
+      "line22Name": "imported",
+      "color": "#a18157",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "9",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_010",
+      "name": "Screenshot 10 (10,24)",
+      "category": "terrain",
+      "line22": 1,
+      "line22Name": "imported",
+      "color": "#686629",
+      "blocked": false,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "10",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    },
+    {
+      "id": "ss_011",
+      "name": "Screenshot 11 (11,24)",
+      "category": "boundaries",
+      "line22": 31,
+      "line22Name": "imported",
+      "color": "#4e5f89",
+      "blocked": true,
+      "types": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "11",
+        "24",
+        "11",
+        "24",
+        "11",
+        "24",
+        "11",
+        "24",
+        "11",
+        "24"
+      ],
+      "overlayCount": 1,
+      "sources": [
+        {
+          "map": "ManorReference",
+          "x": -1,
+          "y": -1
+        }
+      ],
+      "primaryMap": "ManorReference"
+    }
+  ]
+}

@@ -15,8 +15,11 @@ game/Content/
 
 # Runtime / patch artifacts
 game/.input-focus-patched
+game/.ai-p2-patched
+game/zombie-estate.prefs
 game/xnatofna-crash.log
 *.pre-focus-patch
+*.pre-ai-p2-patch
 Microsoft.Xna.Framework.RuntimeProfile
 
 # OS / editor
@@ -36,6 +39,14 @@ obj/
 
 # Temporary Mono install paths
 mono-payload/
+
+# Licensed / local carnival music (import with scripts/import-carnival-music.py)
+game/CarnivalMusic/carnival_main.wav
+game/CarnivalMusic/carnival_main.txt
+game/CarnivalMusic/carnival_track_1.wav
+game/CarnivalMusic/carnival_track_2.wav
+game/CarnivalMusic/carnival_tracks.json
+game/CarnivalMusic/source/
 
 # Python scratch
 __pycache__/

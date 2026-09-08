@@ -36,4 +36,4 @@ chmod +x run-mac.sh scripts/*.sh
 **Notes:**
 - Game assets (`Content/*.xnb`) are not in git; `extract-recovery-payload.sh` pulls them from the recovery launcher.
 - Internet Archive loose dump is incomplete; full XBLIG package is documented in the repo README.
-- Co-op: host runs the Mac build; friends can join via Parsec virtual gamepads.
+- Co-op: up to 4 players on one machine (local controllers). Remote friends with controllers need a **Windows Parsec host** (recovery build) — Parsec virtual gamepads do not work on macOS hosts.

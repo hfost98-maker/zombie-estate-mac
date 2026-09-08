@@ -1,6 +1,8 @@
 # Map editing guide
 
-Zombie Estate loads **one level at a time**, hardcoded in the executable as:
+Zombie Estate loads **one level at a time**. With the AI/map patch (`scripts/patch-ai-player2.cs`), you can pick the active map on **character select** using D-pad left/right (label shown at top of screen). The level is built when you press Start to begin the run—not when the game first launches.
+
+Without the patch, only the hardcoded `Manor.*` filenames are used (see **Adding a brand-new map name** below).
 
 | File | Purpose | Size |
 |------|---------|------|
@@ -52,14 +54,41 @@ The game does **not** read `TestMap_NEW.txt` or `OLDLEVELS/` unless you copy/ren
 |-----|--------|--------|------|
 | **Manor** (default) | `Manor.txt` | `ManorSpawns.txt` | `PathMap_Manor.txt` |
 | **TestMap NEW** | `TestMap_NEW.txt` | `TestMapSpawns_NEW.txt` | `PathMap_New.txt` |
+| **Hedge Maze** (generated) | `HedgeMaze.txt` | `HedgeMazeSpawns.txt` | `PathMap_HedgeMaze.txt` |
+
+Regenerate Hedge Maze: `python3 scripts/generate-hedge-maze.py`
+
+## Visual map builder dashboard
+
+Use the browser-based editor to paint maps with Manor-derived stamps and export game-ready files:
+
+```bash
+./scripts/open-map-editor.sh
+```
+
+See `tools/map-editor/README.md` for workflow. Exported triplets can be added to `scripts/GameMods.cs` map rotation (same as other custom maps).
+
+## Zombie Estate 2 maps (Steam — not bundled)
+
+ZE2 uses a **different engine**; its assets are not drop-in compatible with ZE1. The Mac port registers optional ZE2-style slots that appear in the map rotation **only when all three files exist** under `game/Maps/`:
+
+| Label | Layout | Spawns | Path |
+|-------|--------|--------|------|
+| Graveyard (ZE2) | `Maps/Graveyard.txt` | `Maps/GraveyardSpawns.txt` | `Maps/PathMap_Graveyard.txt` |
+| Church (ZE2) | `Maps/Church.txt` | `Maps/ChurchSpawns.txt` | `Maps/PathMap_Church.txt` |
+| Mall (ZE2) | `Maps/Mall.txt` | `Maps/MallSpawns.txt` | `Maps/PathMap_Mall.txt` |
+
+Each pack must be **32×32 tiles** with the same `.txt` formats as Manor (22528-line layout file). There is no official converter from ZE2 Steam files today—you would need to recreate or port layouts manually, or use community tools if available. Place converted triplets in `game/Maps/` and restart the game.
+
+See also `game/Maps/README.md`.
 
 ## Smaller legacy maps (112×128 cells — different size)
 
-`TestMap.txt` and `OLDLEVELS/House.txt` use a **different grid size** and cannot be used as drop-in replacements without modifying the compiled game (level dimensions are fixed at 32×32 in the `.exe`).
+`TestMap.txt` and `OLDLEVELS/House.txt` use a **different grid size** and cannot be used as drop-in replacements without modifying the compiled game (level dimensions are fixed at 32×32 in the `.exe`). They are **not** in the in-game map rotation.
 
 ## Adding a brand-new map name
 
-The `.exe` only references `Manor.txt` / `PathMap_Manor.txt` / `ManorSpawns.txt`. To use a custom filename you would need to patch the executable strings (Mono.Cecil) — not supported by scripts here. **Workaround:** overwrite the `Manor.*` files with your custom map data.
+With the map-selection patch, add entries in `scripts/GameMods.cs` (`EnsureInitialized`) and re-run the patch (see README **Rebuilding tools**). Without the patch, the `.exe` only references `Manor.txt` / `PathMap_Manor.txt` / `ManorSpawns.txt`. **Workaround:** overwrite the `Manor.*` files with your custom map data (`./scripts/install-map.sh testmap`).
 
 ## After editing
 

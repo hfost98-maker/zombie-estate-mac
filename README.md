@@ -25,6 +25,17 @@ chmod +x run-mac.sh scripts/*.sh
 
 The recovery launcher is a self-contained Windows FNA build. On Mac it runs under Mono with fnalibs; no timemachine conversion needed.
 
+### Desktop app (recommended)
+
+```bash
+chmod +x scripts/install-desktop-app.sh
+./scripts/install-desktop-app.sh
+```
+
+This installs **Zombie Estate.app** on your Desktop. Double-click to play. On first launch you choose **With AI Teammate** or **Solo**; the choice is saved to `game/zombie-estate.prefs`. Hold **Option** while launching to pick again.
+
+The app runs the game from `~/Projects/zombie-estate-mac` (same folder as this repo).
+
 ## Quick start (Xbox backup only)
 
 If you only have the raw **196 KB Xbox 360** `ZombieEstate.exe` from Internet Archive:
@@ -56,6 +67,7 @@ You still need `game/Content/` (see below).
 ## Current status
 
 - **Recovery build runs on Mac** — SDL3/Metal init, LoadContent, level build verified on Apple Silicon (M1)
+- **AI player 2 (optional)** — the desktop app asks on launch (saved in `game/zombie-estate.prefs`). Hold **Option** while opening the app to choose again. With AI on: P1 gets an **independent camera** (AI no longer pulls the view sideways). Press **A on the P1 controller during a wave** to toggle AI follow. The AI shoots nearby zombies, shops between waves, and auto-readies for the next wave.
 - **110 `.xnb` content files** installed via `scripts/extract-recovery-payload.sh` from the 233 MB recovery launcher
 - Harmless warning on load: `MOJOSHADER_compileEffect Error: Not an Effects Framework binary` (Xbox-only effect bypassed by recovery CPU renderer)
 - **Legacy Xbox-only path:** timemachine conversion still works if you only have the raw Xbox exe, but requires separate `Content/` assets
@@ -94,6 +106,12 @@ Once you have a `Content/` folder, copy it to `game/Content/` and run `./run-mac
 ```bash
 # patch-xna
 mcs -r:lib/Mono.Cecil.dll -out:tools/patch-xna.exe scripts/patch-xna.cs
+
+# patch-input-focus
+mcs -r:lib/Mono.Cecil.dll -out:tools/patch-input-focus.exe scripts/patch-input-focus.cs
+
+# patch-ai-player2
+mcs -r:lib/Mono.Cecil.dll -out:tools/patch-ai-player2.exe scripts/patch-ai-player2.cs
 
 # XnaToFna timemachine (requires msbuild + submodules)
 git clone --recursive --branch timemachine https://github.com/0x0ade/XnaToFna.git
